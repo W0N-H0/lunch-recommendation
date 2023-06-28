@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "neodgm";
+  font-style: normal;
+  src: url("./neodgm.woff") format("woff");
+}
+
+@font-face {
+  font-family: "neodgm2";
+  font-style: normal;
+  src: url("./neodgm2.woff") format("woff");
+}
