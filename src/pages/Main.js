@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Slots from "../components/Slots";
 
 const Container = styled.div`
   border-radius: 5px;
@@ -36,7 +37,7 @@ const MainWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 `;
 
 // 하단바
@@ -47,6 +48,10 @@ const FooterBarWrap = styled(TopBarWrap)`
   font-size: 1.3rem;
   > div {
     margin: 0 10px 0 0;
+    > img {
+      width: 40px;
+      height: 40px;
+    }
   }
 `;
 
@@ -66,9 +71,15 @@ const AcctionImg = styled.img`
   height: 40px;
 `;
 
+const AcctionImgStar = styled.img`
+  width: 33px;
+  height: 33px;
+`;
+
 const LinkWrap = styled.div`
   display: flex;
   align-items: center;
+  margin-left: -200px;
 `;
 
 const LinkBarWrap = styled.div`
@@ -122,6 +133,7 @@ const MainTitle = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  margin: 30px;
 `;
 
 const MainTitleText = styled.h1`
@@ -239,7 +251,7 @@ const Main = () => {
           <LinkWrap>
             <LinkBarWrap>
               <LinkBar>https:// 프로젝트.참숯가마</LinkBar>
-              <AcctionImg src="/images/star.png" alt="bookmark" />
+              <AcctionImgStar src="/images/star.png" alt="bookmark" />
             </LinkBarWrap>
 
             <AcctionBtn>
@@ -275,31 +287,7 @@ const Main = () => {
           </MainTitle>
 
           {/* 게임 */}
-          <MainGame>
-            {/* 룰렛 */}
-            <GameWrap>
-              <RouletteWrap>
-                <CoinImgLeft src="/images/coin.png" alt="" />
-
-                {/* 아이콘이랑 여기서 구현하시면 됩니다. */}
-
-                <CoinImgRight src="/images/coin.png" alt="" />
-              </RouletteWrap>
-            </GameWrap>
-
-            {/* 입력/작동 버튼 */}
-            <MainGameBtnWram>
-              <MapModal>
-                <MapInnerText>지 역 선 택</MapInnerText>
-              </MapModal>
-              <StartClick>
-                <StartText>Click!</StartText>
-              </StartClick>
-              <MapSearch>
-                <MapInnerText>지 역 구 입 력</MapInnerText>
-              </MapSearch>
-            </MainGameBtnWram>
-          </MainGame>
+          <Slots></Slots>
         </MainWrap>
 
         {/* 하단바 */}
