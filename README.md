@@ -7,7 +7,7 @@
 ### 컴포넌트
 ---------------------------------
 
-<img width="3181" alt="4eaec772e1f8d6df" src="https://github.com/YebinYun/lunch-recomandation/assets/122279587/313e3373-f9d5-4911-8daf-044d60c5ead4">
+<img width="3100" alt="컴포넌트 구조도" src= "img/projectsummary.png">
 
 <br>
 <br>
