@@ -110,57 +110,57 @@ const AcctionImg = styled.img`
 
 
 const MainModal = () => {
-    return (
-        <div>
-            <Container>
+  return (
+    <div>
+      <Container>
 
-                {/* 상단바-1 */}
-                <TopBarWrap>
-                    {/* 동작 버튼 */}
-                    <AcctionBtnWrap>
-                        {/* 방향키 */}
-                        <AcctionBtn>
-                            <AcctionImg src="/images/left-btn.png" alt="back button" />
-                        </AcctionBtn>
-                        <AcctionBtn>
-                            <AcctionImg src="/images/right-btn.png" alt="next button" />
-                        </AcctionBtn>
-                    </AcctionBtnWrap>
+        {/* 상단바-1 */}
+        <TopBarWrap>
+          {/* 동작 버튼 */}
+          <AcctionBtnWrap>
+            {/* 방향키 */}
+            <AcctionBtn>
+              <AcctionImg src="/images/left-btn.png" alt="back button" />
+            </AcctionBtn>
+            <AcctionBtn>
+              <AcctionImg src="/images/right-btn.png" alt="next button" />
+            </AcctionBtn>
+          </AcctionBtnWrap>
 
-                    {/* 동작 버튼 */}
-                    <AcctionBtnWrap>
-                        <AcctionBtn><AcctionImg src="/images/hide-btn.png" alt="hide button" /></AcctionBtn>
-                        <AcctionBtn><AcctionImg src="/images/close-btn.png " alt="close button" /></AcctionBtn>
-                    </AcctionBtnWrap>
-                </TopBarWrap>
+          {/* 동작 버튼 */}
+          <AcctionBtnWrap>
+            <AcctionBtn><AcctionImg src="/images/hide-btn.png" alt="hide button" /></AcctionBtn>
+            <AcctionBtn><AcctionImg src="/images/close-btn.png " alt="close button" /></AcctionBtn>
+          </AcctionBtnWrap>
+        </TopBarWrap>
 
-                {/* 일단 흰 배경으로 감춤.. 추후 없애는 편으로.. */}
-                <SecondBarWrap />
-
-
-                {/* 메인창 */}
-                <MainWrap>
-
-                    <MainText> 오늘은 (당첨) </MainText>
-                    <ResultIcon src="/images/korean-food.png" alt="" />
-                    <ResultClick>
-                        <ResultText>추천 가기</ResultText>
-                    </ResultClick>
+        {/* 일단 흰 배경으로 감춤.. 추후 없애는 편으로.. */}
+        <SecondBarWrap />
 
 
-                </MainWrap>
+        {/* 메인창 */}
+        <MainWrap>
+
+          <MainText> 오늘은 (당첨) </MainText>
+          <ResultIcon src="/images/korean-food.png" alt="" />
+          <ResultClick>
+            <ResultText>추천 가기</ResultText>
+          </ResultClick>
 
 
-                {/* 하단바 */}
-                <FooterBarWrap>
-                    <div>
-                        <img src="/images/emojione-fire.png" alt="" />
-                    </div>
-                    <div>I LOVE (당첨)</div>
-                </FooterBarWrap>
-            </Container>
-        </div>
-    );
+        </MainWrap>
+
+
+        {/* 하단바 */}
+        <FooterBarWrap>
+          <div>
+            <img src="/images/emojione-fire.png" alt="" />
+          </div>
+          <div>I LOVE (당첨)</div>
+        </FooterBarWrap>
+      </Container>
+    </div>
+  );
 };
 
 export default MainModal;
