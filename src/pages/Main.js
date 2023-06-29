@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Slots from "../components/Slots";
+import MapModalFir from "../components/MapModalFirst";
+import MainModal from "../components/MainModal";
 
 const Container = styled.div`
   border-radius: 5px;
@@ -27,7 +29,6 @@ const TopBarWrap = styled.div`
 // 상단바-2
 const SecondBarWrap = styled(TopBarWrap)`
   height: 5%;
-  background: #f6b7a8;
 `;
 
 // 메인창
@@ -137,15 +138,19 @@ const MainTitle = styled.div`
 `;
 
 const MainTitleText = styled.h1`
-  color: black;
   font-size: 50px;
   margin: 0;
   color: white;
+  text-shadow: -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black ;
 `;
 
 const SuvTitleText = styled(MainTitleText)`
   color: #777;
   font-size: 20px;
+  text-shadow:none; 
 `;
 
 // 메인 창 하단 게임 부분
@@ -298,6 +303,8 @@ const Main = () => {
           <div>I LOVE SEOUL</div>
         </FooterBarWrap>
       </Container>
+      <MapModalFir />
+      <MainModal />
     </div>
   );
 };
