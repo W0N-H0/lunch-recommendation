@@ -112,6 +112,38 @@ section {
   margin: 0px 20px 10px 10px;
 }
 
+.subWarp {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.regionSelect > select {
+  width: 200px;
+  height: 50px;
+  margin-right: 50px;
+  border-radius: 5px;
+  border: 2px solid black;
+  font-size: 1.2rem;
+  padding-left: 15px;
+  padding-right: 15px;
+  appearance: none;
+  background: #fff2e9;
+  background-image: url("./img/down.png") no-repeat right 10px center;
+}
+
+.inputDistrict > input {
+  width: 200px;
+  height: 50px;
+  margin-left: 50px;
+  border-radius: 5px;
+  background: #fff2e9;
+  border: 2px solid black;
+  font-size: 1.2rem;
+  padding-left: 15px;
+}
+
 .a {
   margin: 10px;
 }

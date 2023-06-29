@@ -91,7 +91,22 @@ function Slots() {
     <div className="MainGame">
       <GameWarp slotRefs={slotRefs} foods={foods}></GameWarp>
       {/* 여기 subWarp 만들고, 그 안에  rollContainer과 지역선택, 지역구입력 창 넣어야할듯 */}
-      <RollContainer rolling={rolling} roll={roll} />
+
+      <div className="subWarp">
+        <div className="regionSelect">
+          <select>
+            <option disabled selected>
+              지역 선택
+            </option>
+
+            <option value="seoul"> 서울시</option>
+          </select>
+        </div>
+        <RollContainer rolling={rolling} roll={roll} />
+        <div className="inputDistrict">
+          <input type="text" placeholder="지역구 입력"></input>
+        </div>
+      </div>
     </div>
   );
 }
