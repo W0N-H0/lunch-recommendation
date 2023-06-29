@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
 import Recomandation from "./pages/Recomandation";
 import "./App.css";
-
+//
 const BackgroundImage = styled.div`
   background-image: url("/images/unnamed.png");
   background-repeat: no-repeat;

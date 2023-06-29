@@ -16,6 +16,7 @@ import japaneseFood3 from "../img/japaneseFood3.png";
 import schoolFood1 from "../img/schoolFood1.png";
 import schoolFood2 from "../img/schoolFood2.png";
 import schoolFood3 from "../img/schoolFood3.png";
+//
 
 function Slots({
   food1,

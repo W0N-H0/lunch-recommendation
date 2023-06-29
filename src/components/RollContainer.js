@@ -1,6 +1,6 @@
 import React from "react";
 import loading from "../img/loading.gif";
-
+//
 const RollContainer = ({ rolling, roll }) => {
   return (
     <div className="rollContainer">

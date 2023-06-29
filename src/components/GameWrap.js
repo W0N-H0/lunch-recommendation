@@ -1,6 +1,6 @@
 import React from "react";
 import coin from "../img/coin.png";
-
+//
 const GameWarp = ({ slotRefs, foods }) => {
   return (
     <div className="GameWarp">
