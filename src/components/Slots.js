@@ -17,10 +17,20 @@ import schoolFood1 from "../img/schoolFood1.png";
 import schoolFood2 from "../img/schoolFood2.png";
 import schoolFood3 from "../img/schoolFood3.png";
 
-function Slots() {
-  const [food1, setFood1] = useState(koreanFood1);
-  const [food2, setFood2] = useState(koreanFood2);
-  const [food3, setFood3] = useState(koreanFood3);
+function Slots({
+  food1,
+  food2,
+  food3,
+  setFood1,
+  setFood2,
+  setFood3,
+  onClick,
+  onSlotFinish,
+  setResult,
+}) {
+  // const [food1, setFood1] = useState(koreanFood1);
+  // const [food2, setFood2] = useState(koreanFood2);
+  // const [food3, setFood3] = useState(koreanFood3);
 
   const [rolling, setRolling] = useState(false);
 
@@ -43,6 +53,7 @@ function Slots() {
 
   useEffect(() => {
     if (!rolling) {
+      onSlotFinish();
       const slot1Top = slotRefs[0].current.style.top;
       const slot3Top = `calc(${slot1Top} - 5px)`;
       slotRefs[2].current.style.top = slot3Top;
@@ -50,12 +61,12 @@ function Slots() {
         slotRef.current.style.top = slot1Top;
       });
     }
-  }, [rolling]);
+  }, [rolling, onSlotFinish]);
 
   const roll = () => {
     const totalRotations = 10;
-
     setRolling(true);
+
     const rotationInterval = setInterval(() => {
       slotRefs.forEach((slotRef, i) => {
         const selected = triggerSlotRotation(slotRef, i, foods);
@@ -72,6 +83,8 @@ function Slots() {
       clearInterval(rotationInterval);
       setRolling(false);
     }, totalRotations * 400);
+
+    onClick();
   };
 
   const triggerSlotRotation = (slotRef, slotIndex, foods) => {
@@ -98,7 +111,6 @@ function Slots() {
             <option disabled selected>
               지역 선택
             </option>
-
             <option value="seoul"> 서울시</option>
           </select>
         </div>

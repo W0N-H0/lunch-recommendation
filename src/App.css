@@ -129,8 +129,8 @@ section {
   padding-left: 15px;
   padding-right: 15px;
   appearance: none;
+  background: url("./img/down.png") no-repeat right 10px center;
   background: #fff2e9;
-  background-image: url("./img/down.png") no-repeat right 10px center;
 }
 
 .inputDistrict > input {

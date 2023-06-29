@@ -1,5 +1,21 @@
 import styled from "styled-components";
 import Slots from "../components/Slots";
+import React, { useRef, useState, useEffect } from "react";
+import koreanFood1 from "../img/koreanFood1.png";
+import koreanFood2 from "../img/koreanFood2.png";
+import koreanFood3 from "../img/koreanFood3.png";
+import chineseFood1 from "../img/chineseFood1.png";
+import chineseFood2 from "../img/chineseFood2.png";
+import chineseFood3 from "../img/chineseFood3.png";
+import westernFood1 from "../img/westernFood1.png";
+import westernFood2 from "../img/westernFood2.png";
+import westernFood3 from "../img/westernFood3.png";
+import japaneseFood1 from "../img/japaneseFood1.png";
+import japaneseFood2 from "../img/japaneseFood2.png";
+import japaneseFood3 from "../img/japaneseFood3.png";
+import schoolFood1 from "../img/schoolFood1.png";
+import schoolFood2 from "../img/schoolFood2.png";
+import schoolFood3 from "../img/schoolFood3.png";
 
 const Container = styled.div`
   border-radius: 5px;
@@ -231,6 +247,25 @@ const MainGameBtnWram = styled.div`
 `;
 
 const Main = () => {
+  const [food1, setFood1] = useState(koreanFood1);
+  const [food2, setFood2] = useState(koreanFood2);
+  const [food3, setFood3] = useState(koreanFood3);
+  // 슬롯이 다 돌아갔는지를 알려주는 useState
+  const [result, setResult] = useState(0);
+
+  // 클릭시 result값을 false로 바꿔줌
+  const handleClick = () => {
+    setResult(false);
+    console.log("Result:", result);
+  };
+
+  const handleSlotFinish = () => {
+    // 슬롯이 다 돌아갔을때, food1과 result 상태를 불러올수 있는 함수
+    setResult(true);
+    // console.log("Food1:", food1);
+    console.log("Result:", result);
+  };
+
   return (
     <div>
       <Container>
@@ -287,7 +322,17 @@ const Main = () => {
           </MainTitle>
 
           {/* 게임 */}
-          <Slots></Slots>
+          <Slots
+            food1={food1}
+            food2={food2}
+            food3={food3}
+            setFood1={setFood1}
+            setFood2={setFood2}
+            setFood3={setFood3}
+            onClick={handleClick}
+            onSlotFinish={handleSlotFinish}
+            setResult={setResult}
+          />
         </MainWrap>
 
         {/* 하단바 */}
@@ -297,6 +342,7 @@ const Main = () => {
           </div>
           <div>I LOVE SEOUL</div>
         </FooterBarWrap>
+        <div>{food1.includes("korean") && result ? "한국음식!" : null}</div>
       </Container>
     </div>
   );
