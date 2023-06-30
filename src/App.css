@@ -176,6 +176,11 @@ section {
   margin: 0 0 10px 0;
 }
 
+.roll:hover {
+  background-color: #ea8573;
+  transition: 0.7s;
+}
+
 .loading {
   display: flex;
   flex-direction: row;

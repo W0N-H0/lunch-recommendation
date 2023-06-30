@@ -346,10 +346,9 @@ const Main = () => {
           </div>
           <div>I LOVE SEOUL</div>
         </FooterBarWrap>
-        <div>{food1.includes("korean") && result ? "한국음식!" : null}</div>
       </Container>
       <MapModalFir />
-      <MainModal />
+      <MainModal food1={food1} result={result} />
     </div>
   );
 };

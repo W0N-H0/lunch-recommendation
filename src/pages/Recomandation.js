@@ -290,7 +290,6 @@ const Recomandation = () => {
           </MainTitle>
 
           {/* 게임 */}
-          <Slots></Slots>
         </MainWrap>
 
         {/* 하단바 */}
