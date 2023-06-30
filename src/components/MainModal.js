@@ -48,8 +48,9 @@ const MainText = styled.h1`
 `;
 
 const ResultIcon = styled.img`
-  width: 800px;
-  height: 215px;
+  width: 700px;
+  height: 140px;
+  margin: 50px;
 `;
 
 // 추천가기.
@@ -103,7 +104,7 @@ const AcctionBtnWrap = styled.div`
 const AcctionBtn = styled.button`
   background-color: transparent;
   border: none;
-  margin: 10px;
+  margin: 16px 10px 10px 10px;
   padding: 0;
 `;
 
@@ -123,18 +124,23 @@ const MainModal = ({ food1, result }) => {
       break;
     case food1.includes("chinese"):
       food = "중식";
+      foodImageName = "chinese-food";
       break;
     case food1.includes("western"):
       food = "양식";
+      foodImageName = "western-food";
       break;
     case food1.includes("japanese"):
       food = "일식";
+      foodImageName = "japanese-food";
       break;
     case food1.includes("school"):
       food = "분식";
+      foodImageName = "school-food";
       break;
     default:
       food = null;
+      foodImageName = null;
       break;
   }
   const navigate = useNavigate();

@@ -1,4 +1,5 @@
 /**/
+
 .MainGame {
   height: 410px;
   width: 1000px;
@@ -197,6 +198,15 @@ section {
 
 .rolling {
   animation: blinkingText 1.3s ease infinite;
+}
+
+.dropDownContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.closeButton {
+  cursor: pointer;
 }
 
 @keyframes blinkingText {

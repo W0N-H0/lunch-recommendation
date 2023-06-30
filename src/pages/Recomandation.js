@@ -3,6 +3,17 @@ import Slots from "../components/Slots";
 import Menu from "../components/Menu";
 import MapModalSec from "../components/MapModalSec";
 //
+
+const BackgroundImage = styled.div`
+  background-image: url("/images/background-recomandation.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
 const Container = styled.div`
   border-radius: 5px;
   border: 3px solid black;
@@ -235,74 +246,76 @@ const MainGameBtnWram = styled.div`
 
 const Recomandation = () => {
   return (
-    <div>
-      <Container>
-        {/* 상단바-1 */}
-        <TopBarWrap>
-          {/* 동작 버튼 */}
-          <AcctionBtnWrap>
-            {/* 방향키 */}
-            <AcctionBtn>
-              <AcctionImg src="/images/left-btn.png" alt="back button" />
-            </AcctionBtn>
-            <AcctionBtn>
-              <AcctionImg src="/images/right-btn.png" alt="next button" />
-            </AcctionBtn>
-          </AcctionBtnWrap>
+    <>
+      <BackgroundImage>
+        <Container>
+          {/* 상단바-1 */}
+          <TopBarWrap>
+            {/* 동작 버튼 */}
+            <AcctionBtnWrap>
+              {/* 방향키 */}
+              <AcctionBtn>
+                <AcctionImg src="/images/left-btn.png" alt="back button" />
+              </AcctionBtn>
+              <AcctionBtn>
+                <AcctionImg src="/images/right-btn.png" alt="next button" />
+              </AcctionBtn>
+            </AcctionBtnWrap>
 
-          {/* 링크 느낌 구현 */}
-          <LinkWrap>
-            <LinkBarWrap>
-              <LinkBar>https:// 프로젝트.참숯가마</LinkBar>
-              <AcctionImgStar src="/images/star.png" alt="bookmark" />
-            </LinkBarWrap>
+            {/* 링크 느낌 구현 */}
+            <LinkWrap>
+              <LinkBarWrap>
+                <LinkBar>https:// 프로젝트.참숯가마</LinkBar>
+                <AcctionImgStar src="/images/star.png" alt="bookmark" />
+              </LinkBarWrap>
 
-            <AcctionBtn>
-              <AcctionImg src="/images/btn.png" alt="reflash button" />
-            </AcctionBtn>
-          </LinkWrap>
+              <AcctionBtn>
+                <AcctionImg src="/images/btn.png" alt="reflash button" />
+              </AcctionBtn>
+            </LinkWrap>
 
-          {/* 동작 버튼 */}
-          <AcctionBtnWrap>
-            <AcctionBtn>
-              <AcctionImg src="/images/hide-btn.png" alt="hide button" />
-            </AcctionBtn>
-            <AcctionBtn>
-              <AcctionImg src="/images/close-btn.png " alt="close button" />
-            </AcctionBtn>
-          </AcctionBtnWrap>
-        </TopBarWrap>
+            {/* 동작 버튼 */}
+            <AcctionBtnWrap>
+              <AcctionBtn>
+                <AcctionImg src="/images/hide-btn.png" alt="hide button" />
+              </AcctionBtn>
+              <AcctionBtn>
+                <AcctionImg src="/images/close-btn.png " alt="close button" />
+              </AcctionBtn>
+            </AcctionBtnWrap>
+          </TopBarWrap>
 
-        {/* 상단바-2 */}
-        <SecondBarWrap>
-          <MapBtn>
-            {" "}
-            <MapText> 지역구 보러가기 </MapText>{" "}
-          </MapBtn>
-        </SecondBarWrap>
+          {/* 상단바-2 */}
+          <SecondBarWrap>
+            <MapBtn>
+              {" "}
+              <MapText> 지역구 보러가기 </MapText>{" "}
+            </MapBtn>
+          </SecondBarWrap>
 
-        {/* 메인창 */}
-        <MainWrap>
-          {/* 타이틀 */}
-          <MainTitle>
-            <MainTitleText> 오늘 점심 뭐 먹지? </MainTitleText>
-            <SuvTitleText> 서울시 점메추 룰렛 </SuvTitleText>
-          </MainTitle>
+          {/* 메인창 */}
+          <MainWrap>
+            {/* 타이틀 */}
+            <MainTitle>
+              <MainTitleText> 오늘 점심 뭐 먹지? </MainTitleText>
+              <SuvTitleText> 서울시 점메추 룰렛 </SuvTitleText>
+            </MainTitle>
 
-          {/* 게임 */}
-        </MainWrap>
+            {/* 게임 */}
+          </MainWrap>
 
-        {/* 하단바 */}
-        <FooterBarWrap>
-          <div>
-            <img src="/images/emojione-fire.png" alt="" />
-          </div>
-          <div>I LOVE SEOUL</div>
-        </FooterBarWrap>
-      </Container>
-      <MapModalSec />
-      <Menu />
-    </div>
+          {/* 하단바 */}
+          <FooterBarWrap>
+            <div>
+              <img src="/images/emojione-fire.png" alt="" />
+            </div>
+            <div>I LOVE SEOUL</div>
+          </FooterBarWrap>
+        </Container>
+        <MapModalSec />
+        <Menu />
+      </BackgroundImage>
+    </>
   );
 };
 

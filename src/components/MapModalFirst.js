@@ -1,14 +1,27 @@
 import styled from "styled-components";
-//
+
+const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+`;
+
 const Container = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 5px;
   border: 3px solid black;
   border-bottom: 0px;
   width: 1100px;
   height: 720px;
   text-align: center;
-  margin: 70px auto;
-  box-shadow: 5px 10px 10px 5px gray;
+  z-index: 999;
 `;
 
 // 상단바-1.
@@ -79,11 +92,15 @@ const AcctionBtn = styled.button`
 const AcctionImg = styled.img`
   width: 40px;
   height: 40px;
+  .closeButton {
+    background-color: black;
+    cursor: pointer;
+  }
 `;
 
-const MapModalFir = () => {
+const MapModalFir = ({ openModal, closeModal }) => {
   return (
-    <div>
+    <ModalBackground>
       <Container>
         {/* 상단바-1 */}
         <TopBarWrap>
@@ -104,7 +121,12 @@ const MapModalFir = () => {
               <AcctionImg src="/images/hide-btn.png" alt="hide button" />
             </AcctionBtn>
             <AcctionBtn>
-              <AcctionImg src="/images/close-btn.png " alt="close button" />
+              <AcctionImg
+                src="/images/close-btn.png "
+                alt="close button"
+                className="closeButton"
+                onClick={closeModal}
+              />
             </AcctionBtn>
           </AcctionBtnWrap>
         </TopBarWrap>
@@ -125,7 +147,7 @@ const MapModalFir = () => {
           <div>I LOVE SEOUL</div>
         </FooterBarWrap>
       </Container>
-    </div>
+    </ModalBackground>
   );
 };
 

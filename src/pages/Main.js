@@ -19,7 +19,46 @@ import schoolFood3 from "../img/schoolFood3.png";
 import MapModalFir from "../components/MapModalFirst";
 import MainModal from "../components/MainModal";
 
-//
+const deselectedOptions = [
+  "강남구",
+  "강동구",
+  "강북구",
+  "강서구",
+  "관악구",
+  "광진구",
+  "구로구",
+  "금천구",
+  "노원구",
+  "도봉구",
+  "동대문구",
+  "동작구",
+  "마포구",
+  "서대문구",
+  "서초구",
+  "성동구",
+  "성북구",
+  "송파구",
+  "양천구",
+  "영등포구",
+  "용산구",
+  "은평구",
+  "종로구",
+  "중구",
+  "중랑구",
+];
+
+// 배경화면
+const BackgroundImage = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("/images/unnamed.png");
+  background-size: cover;
+`;
+
+// [전체]홈페이지창
 const Container = styled.div`
   border-radius: 5px;
   border: 3px solid black;
@@ -134,6 +173,7 @@ const MapText = styled.p`
   font-size: 15px;
   margin: 0;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 const MainTitle = styled.div`
@@ -235,13 +275,6 @@ const MapModal = styled.div`
   align-items: center;
 `;
 
-//지역구 입력
-const MapSearch = styled(MapModal)``;
-
-const MapInnerText = styled.p`
-  font-weight: bold;
-  color: #777;
-`;
 // 메인 창 하단 버튼 부분
 const MainGameBtnWram = styled.div`
   width: 900px;
@@ -270,86 +303,113 @@ const Main = () => {
     console.log("Result:", result);
   };
 
+  // // 지역구 모달창
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  // 자동완성 구현
+  const [inputValue, setInputValue] = useState("");
+  const [options, setOptions] = useState(deselectedOptions);
+
   return (
-    <div>
-      <Container>
-        {/* 상단바-1 */}
-        <TopBarWrap>
-          {/* 동작 버튼 */}
-          <AcctionBtnWrap>
-            {/* 방향키 */}
-            <AcctionBtn>
-              <AcctionImg src="/images/left-btn.png" alt="back button" />
-            </AcctionBtn>
-            <AcctionBtn>
-              <AcctionImg src="/images/right-btn.png" alt="next button" />
-            </AcctionBtn>
-          </AcctionBtnWrap>
+    <>
+      <BackgroundImage>
+        <Container>
+          {/* 상단바-1 */}
+          <TopBarWrap>
+            {/* 동작 버튼 */}
+            <AcctionBtnWrap>
+              {/* 방향키 */}
+              <AcctionBtn>
+                <AcctionImg src="/images/left-btn.png" alt="back button" />
+              </AcctionBtn>
+              <AcctionBtn>
+                <AcctionImg src="/images/right-btn.png" alt="next button" />
+              </AcctionBtn>
+            </AcctionBtnWrap>
 
-          {/* 링크 느낌 구현 */}
-          <LinkWrap>
-            <LinkBarWrap>
-              <LinkBar>https:// 프로젝트.참숯가마</LinkBar>
-              <AcctionImgStar src="/images/star.png" alt="bookmark" />
-            </LinkBarWrap>
+            {/* 링크 느낌 구현 */}
+            <LinkWrap>
+              <LinkBarWrap>
+                <LinkBar>https:// 프로젝트.참숯가마</LinkBar>
+                <AcctionImgStar src="/images/star.png" alt="bookmark" />
+              </LinkBarWrap>
 
-            <AcctionBtn>
-              <AcctionImg src="/images/btn.png" alt="reflash button" />
-            </AcctionBtn>
-          </LinkWrap>
+              <AcctionBtn>
+                <AcctionImg src="/images/btn.png" alt="reflash button" />
+              </AcctionBtn>
+            </LinkWrap>
 
-          {/* 동작 버튼 */}
-          <AcctionBtnWrap>
-            <AcctionBtn>
-              <AcctionImg src="/images/hide-btn.png" alt="hide button" />
-            </AcctionBtn>
-            <AcctionBtn>
-              <AcctionImg src="/images/close-btn.png " alt="close button" />
-            </AcctionBtn>
-          </AcctionBtnWrap>
-        </TopBarWrap>
+            {/* 동작 버튼 */}
+            <AcctionBtnWrap>
+              <AcctionBtn>
+                <AcctionImg src="/images/hide-btn.png" alt="hide button" />
+              </AcctionBtn>
+              <AcctionBtn>
+                <AcctionImg src="/images/close-btn.png " alt="close button" />
+              </AcctionBtn>
+            </AcctionBtnWrap>
+          </TopBarWrap>
 
-        {/* 상단바-2 */}
-        <SecondBarWrap>
-          <MapBtn>
-            {" "}
-            <MapText> 지역구 보러가기 </MapText>{" "}
-          </MapBtn>
-        </SecondBarWrap>
+          {/* 상단바-2 */}
+          <SecondBarWrap>
+            <MapBtn>
+              <MapText onClick={openModal}> 지역구 보러가기 </MapText>
+            </MapBtn>
+          </SecondBarWrap>
 
-        {/* 메인창 */}
-        <MainWrap>
-          {/* 타이틀 */}
-          <MainTitle>
-            <MainTitleText> 오늘 점심 뭐 먹지? </MainTitleText>
-            <SuvTitleText> 서울시 점메추 룰렛 </SuvTitleText>
-          </MainTitle>
+          {/* 모달창 띄우는 곳*/}
+          {showModal ? (
+            <MapModalFir openModal={openModal} closeModal={closeModal} />
+          ) : (
+            ""
+          )}
 
-          {/* 게임 */}
-          <Slots
-            food1={food1}
-            food2={food2}
-            food3={food3}
-            setFood1={setFood1}
-            setFood2={setFood2}
-            setFood3={setFood3}
-            onClick={handleClick}
-            onSlotFinish={handleSlotFinish}
-            setResult={setResult}
-          />
-        </MainWrap>
+          {/* 메인창 */}
+          <MainWrap>
+            {/* 타이틀 */}
+            <MainTitle>
+              <MainTitleText> 오늘 점심 뭐 먹지? </MainTitleText>
+              <SuvTitleText> 서울시 점메추 룰렛 </SuvTitleText>
+            </MainTitle>
 
-        {/* 하단바 */}
-        <FooterBarWrap>
-          <div>
-            <img src="/images/emojione-fire.png" alt="" />
-          </div>
-          <div>I LOVE SEOUL</div>
-        </FooterBarWrap>
-      </Container>
-      <MapModalFir />
-      <MainModal food1={food1} result={result} />
-    </div>
+            {/* 게임 */}
+            <Slots
+              food1={food1}
+              food2={food2}
+              food3={food3}
+              setFood1={setFood1}
+              setFood2={setFood2}
+              setFood3={setFood3}
+              onClick={handleClick}
+              onSlotFinish={handleSlotFinish}
+              setResult={setResult}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              options={options}
+              setOptions={setOptions}
+              deselectedOptions={deselectedOptions}
+            />
+          </MainWrap>
+
+          {/* 하단바 */}
+          <FooterBarWrap>
+            <div>
+              <img src="/images/emojione-fire.png" alt="" />
+            </div>
+            <div>I LOVE FOOD</div>
+          </FooterBarWrap>
+        </Container>
+        <MainModal food1={food1} result={result} />
+      </BackgroundImage>
+    </>
   );
 };
 
