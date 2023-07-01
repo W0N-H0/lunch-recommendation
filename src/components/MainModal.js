@@ -1,15 +1,28 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+`;
+
 const Container = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 5px;
   border: 3px solid black;
-  border-bottom: 0px;
+  border-bottom: none;
   width: 1100px;
   height: 720px;
   text-align: center;
-  margin: 70px auto;
-  box-shadow: 5px 10px 10px 5px gray;
+  z-index: 999;
 `;
 
 // 상단바-1
@@ -24,16 +37,9 @@ const TopBarWrap = styled.div`
   padding: 0px 20px;
 `;
 
-// 상단바-2
-const SecondBarWrap = styled(TopBarWrap)`
-  height: 5%;
-  background: white;
-  border-bottom: 0px;
-`;
-
 // 메인창
 const MainWrap = styled.div`
-  height: 80%;
+  height: 85%;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -112,9 +118,12 @@ const AcctionBtn = styled.button`
 const AcctionImg = styled.img`
   width: 40px;
   height: 40px;
+  .closeButton {
+    cursor: pointer;
+  }
 `;
 
-const MainModal = ({ food1, result }) => {
+const MainModal = ({ food1, result, handleClick }) => {
   let food = "";
   let foodImageName = "";
   switch (true) {
@@ -144,12 +153,13 @@ const MainModal = ({ food1, result }) => {
       break;
   }
   const navigate = useNavigate();
+
   const goToRecomandation = () => {
     navigate("/Recomandation");
   };
 
   return (
-    <div>
+    <ModalBackground>
       <Container>
         {/* 상단바-1 */}
         <TopBarWrap>
@@ -170,13 +180,15 @@ const MainModal = ({ food1, result }) => {
               <AcctionImg src="/images/hide-btn.png" alt="hide button" />
             </AcctionBtn>
             <AcctionBtn>
-              <AcctionImg src="/images/close-btn.png " alt="close button" />
+              <AcctionImg
+                className="closeButton"
+                src="/images/close-btn.png "
+                alt="close button"
+                onClick={handleClick}
+              />
             </AcctionBtn>
           </AcctionBtnWrap>
         </TopBarWrap>
-
-        {/* 일단 흰 배경으로 감춤.. 추후 없애는 편으로.. */}
-        <SecondBarWrap />
 
         {/* 메인창 */}
         <MainWrap>
@@ -216,7 +228,7 @@ const MainModal = ({ food1, result }) => {
           <div>I LOVE {food}</div>
         </FooterBarWrap>
       </Container>
-    </div>
+    </ModalBackground>
   );
 };
 
