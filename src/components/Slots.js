@@ -18,7 +18,7 @@ import schoolFood2 from "../img/schoolFood2.png";
 import schoolFood3 from "../img/schoolFood3.png";
 import styled from "styled-components";
 
-//~81줄까지 자동온성을 위한 CSS
+//~91줄까지 자동완성을 위한 CSS
 const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
 
 export const InputContainer = styled.div`
@@ -32,7 +32,7 @@ export const InputContainer = styled.div`
   z-index: 3;
 
   &:focus-within {
-    box-shadow: ${boxShadow};
+    box-shadow: 0 0 0 0.5px black;
   }
 
   > input {
@@ -42,21 +42,22 @@ export const InputContainer = styled.div`
     padding: 0;
     outline: none;
     font-size: 1.2rem;
-    text-align: center;
     width: 171px;
+    letter-spacing: 1px;
   }
 
   > div.delete-button {
     cursor: pointer;
+    font-size: 1.25rem;
   }
 `;
 
 export const DropDownContainer = styled.ul`
   background-color: #fff2e9;
   position: absolute;
-  width: 212px;
-  top: 755px;
-  transform: translateX(49px);
+  width: 210px;
+  top: 760px;
+  transform: translateX(49.5px);
   margin-left: auto;
   margin-right: auto;
   list-style-type: none;
@@ -66,20 +67,25 @@ export const DropDownContainer = styled.ul`
   margin-inline-end: 0px;
   padding-inline-start: 0px;
   margin-top: -1px;
-  padding: 0.5rem 0;
-  border-left: 2px solid black;
-  border-bottom: 2px solid black;
-  border-right: 2px solid black;
+  padding: 0.5rem 0 0 0.25rem;
+  border: 2.2px solid black;
   border-radius: 5px;
   box-shadow: ${boxShadow};
   z-index: 3;
 
   > li {
-    padding: 0 1rem;
+    padding: 0 0.7rem;
+    text-align: left;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin: 0 0 7px 0;
 
     // 드랍다운 선택시 CSS 추가
     &.selected {
-      background-color: #f1f1f1;
+      background-color: #f9b2a6;
+    }
+    &:hover {
+      background-color: #f9b2a6;
     }
   }
 `;
@@ -137,6 +143,7 @@ function Slots({
   }, [rolling, onSlotFinish]);
 
   const roll = () => {
+    onClick();
     const totalRotations = 10;
     setRolling(true);
 
@@ -156,8 +163,6 @@ function Slots({
       clearInterval(rotationInterval);
       setRolling(false);
     }, totalRotations * 400);
-
-    onClick();
   };
 
   const triggerSlotRotation = (slotRef, slotIndex, foods) => {
@@ -281,11 +286,10 @@ function Slots({
   return (
     <div className="MainGame">
       <GameWarp slotRefs={slotRefs} foods={foods}></GameWarp>
-      {/* 여기 subWarp 만들고, 그 안에  rollContainer과 지역선택, 지역구입력 창 넣어야할듯 */}
 
       <div className="subWarp">
         <div className="regionSelect">
-          <select>
+          <select className="select">
             <option disabled selected>
               지역 선택
             </option>
@@ -307,10 +311,7 @@ function Slots({
               X
             </div>
           </InputContainer>
-          {/* 1. hasText state로 input값의 유무를 확인가능 */}
-          {/* 2. DropDown컴포넌트의 props으로 options, handleComboBox 전달  */}
-          {/* 3. showDropdown 상태 유의  */}
-          {/* 4. selectedOption props 추가 전달*/}
+
           {!hasText || !showDropdown ? null : (
             <DropDown
               options={options}
@@ -329,7 +330,7 @@ export default Slots;
 export const DropDown = ({ options, handleComboBox, selectedOption }) => {
   return (
     <DropDownContainer>
-      {/* TODO : input 값에 맞는 autocomplete 선택 옵션이 보여지는 역할을 합니다. */}
+      {/* input 값에 맞는 autocomplete 선택 옵션이 보여지는 역할 */}
       {/* 검색결과 없을때 case 추가 */}
       {/* selectedOption props 추가 (드랍다운 키보드 입력시 하이라이트 css적용하기 위해) */}
       {options.length === 0 ? (

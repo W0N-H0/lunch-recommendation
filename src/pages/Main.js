@@ -119,7 +119,7 @@ const AcctionBtnWrap = styled.div`
 const AcctionBtn = styled.button`
   background-color: transparent;
   border: none;
-  margin: 10px;
+  margin: 12px 10px 10px 10px;
   padding: 0;
 `;
 
@@ -288,7 +288,7 @@ const Main = () => {
   const [food2, setFood2] = useState(koreanFood2);
   const [food3, setFood3] = useState(koreanFood3);
   // 슬롯이 다 돌아갔는지를 알려주는 useState
-  const [result, setResult] = useState(0);
+  const [result, setResult] = useState(false);
 
   // 클릭시 result값을 false로 바꿔줌
   const handleClick = () => {
