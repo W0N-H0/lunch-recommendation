@@ -206,31 +206,26 @@ const ViewDetails = styled.div`
 const Recomandation = () => {
   const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("https://openapi.naver.com/v1/search/local.json", {
-        params: {
-          query: "마포구 한식 맛집",
-          display: 2,
-        },
-        headers: {
-          "X-Naver-Client-Id": "RrtEscwpDLcuUII9AkHc",
-          "X-Naver-Client-Secret": "Z4xsSCda9i",
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        const { data } = response;
-        console.log(data);
-      })
-      .catch((error) => {
-        let message = "Unknown Error";
+  axios
+    .get("/v1/search/local.json", {
+      params: {
+        query: "마포구 한식 맛집",
+        display: 2,
+      },
+      headers: {
+        "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
+        "X-Naver-Client-Secret": "FBtejVg8km",
+      },
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      let message = "Unknown Error";
 
-        if (error instanceof Error) message = error.message;
-        console.log(message);
-      });
-  }, []);
+      if (error instanceof Error) message = error.message;
+      console.log(message);
+    });
 
   return (
     <>
