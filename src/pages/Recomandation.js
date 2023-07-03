@@ -1,9 +1,10 @@
+import axios from "axios";
 import styled from "styled-components";
 import Slots from "../components/Slots";
 import Menu from "../components/Menu";
 import MapModalSec from "../components/MapModalSec";
+import React, { useRef, useState, useEffect } from "react";
 //
-
 const BackgroundImage = styled.div`
   background-image: url("/images/background-recomandation.png");
   background-repeat: no-repeat;
@@ -29,7 +30,7 @@ const Container = styled.div`
 const TopBarWrap = styled.div`
   border-bottom: 3px solid black;
   height: 7%;
-  background: #ea8573;
+  background: #ffb630;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -39,6 +40,7 @@ const TopBarWrap = styled.div`
 
 // 상단바-2
 const SecondBarWrap = styled(TopBarWrap)`
+  background: #ffd178;
   height: 5%;
 `;
 
@@ -47,9 +49,8 @@ const MainWrap = styled.div`
   height: 80%;
   background-color: white;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-evenly;
 `;
 
 // 하단바
@@ -76,6 +77,7 @@ const AcctionBtn = styled.button`
   border: none;
   margin: 10px;
   padding: 0;
+  cursor: pointer;
 `;
 
 const AcctionImg = styled.img`
@@ -119,6 +121,7 @@ const MapBtn = styled.button`
   border: 2px solid #000;
   background: white;
   margin: 0 10px;
+  cursor: pointer;
 `;
 
 const MapText = styled.p`
@@ -130,121 +133,105 @@ const MapText = styled.p`
   font-weight: bold;
 `;
 
-const MainTitle = styled.div`
-  width: 1000px;
-  height: 150px;
-  border-radius: 15px;
-  border: 3px solid black;
-  background: linear-gradient(
-      177deg,
-      rgba(255, 39, 0, 0.38) 0%,
-      rgba(234, 133, 115, 0) 100%
-    ),
-    #fff2e9;
+// 추천식당 창
+const RecomandationWrap = styled.div`
+  background-color: #ffe9da;
+  border-radius: 25px;
+  border-end-end-radius: 0px;
+  border-end-start-radius: 0px;
+  border: 3px solid #000;
+  width: 600px;
+  margin: 20px 0;
+`;
+
+// 추천 음식
+const TopWrap = styled.div`
+  border-bottom: 3px solid #000;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > h1 {
+    font-size: 2rem;
+  }
+`;
+
+// 추천 음식 사진
+const ImgWrap = styled.div`
+  height: 230px;
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  > div {
+    height: 230px;
+    width: 270px;
+    border-radius: 10px;
+    border: 3px solid #000;
+    background: #fba;
+  }
+`;
+
+// 추천 정보
+const InformationWrap = styled.div`
+  margin: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  margin: 30px;
+  align-items: flex-start;
+  > h1 {
+    font-size: 1.8rem;
+    padding-bottom: 10px;
+  }
+  > p {
+    font-size: 1.2rem;
+  }
+  .InformationText {
+    margin: 10px;
+  }
 `;
 
-const MainTitleText = styled.h1`
-  font-size: 50px;
-  margin: 0;
-  color: white;
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-    1px 1px 0 black;
-`;
-
-const SuvTitleText = styled(MainTitleText)`
-  color: #777;
-  font-size: 20px;
-  text-shadow: none;
-`;
-
-// 메인 창 하단 게임 부분
-const MainGame = styled(MainTitle)`
-  height: 430px;
-  background: #fbe1d2;
-`;
-
-// 룰렛 작동 창 테두리
-const GameWrap = styled.div`
-  width: 900px;
-  height: 250px;
+// 상세 보기
+const ViewDetails = styled.div`
   border-radius: 10px;
-  border: 3px solid black;
-  background: #ffebe7;
+  border: 3px solid #000;
+  height: 60px;
+  width: 500px;
+  background: #f2c198;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-`;
-
-// 룰렛 작동 창
-const RouletteWrap = styled.div`
-  width: 800px;
-  height: 200px;
-  border: 3px solid black;
-  background-color: white;
-  border-radius: 10px;
-`;
-
-const CoinImgLeft = styled.img`
-  position: absolute;
-  left: 25px;
-  top: 40%;
-`;
-const CoinImgRight = styled.img`
-  position: absolute;
-  right: 25px;
-  top: 40%;
-`;
-
-// 게임 시작
-const StartClick = styled.button`
-  width: 250px;
-  height: 125px;
-  background-color: #f9b2a6;
-  border: 3px solid black;
-  border-radius: 10px;
-`;
-const StartText = styled.p`
-  color: black;
-  text-align: center;
-  font-size: 40px;
-  letter-spacing: 5px;
-  margin: 0;
-`;
-
-//지역 선택
-const MapModal = styled.div`
-  width: 250px;
-  height: 50px;
-  border-radius: 10px;
-  border: 2px solid #000;
-  background: #fff2e9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-//지역구 입력
-const MapSearch = styled(MapModal)``;
-
-const MapInnerText = styled.p`
-  font-weight: bold;
-  color: #777;
-`;
-// 메인 창 하단 버튼 부분
-const MainGameBtnWram = styled.div`
-  width: 900px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  margin: auto;
+  cursor: pointer;
 `;
 
 const Recomandation = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://openapi.naver.com/v1/search/local.json", {
+        params: {
+          query: "마포구 한식 맛집",
+          display: 2,
+        },
+        headers: {
+          "X-Naver-Client-Id": "RrtEscwpDLcuUII9AkHc",
+          "X-Naver-Client-Secret": "Z4xsSCda9i",
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const { data } = response;
+        console.log(data);
+      })
+      .catch((error) => {
+        let message = "Unknown Error";
+
+        if (error instanceof Error) message = error.message;
+        console.log(message);
+      });
+  }, []);
+
   return (
     <>
       <BackgroundImage>
@@ -295,13 +282,59 @@ const Recomandation = () => {
 
           {/* 메인창 */}
           <MainWrap>
-            {/* 타이틀 */}
-            <MainTitle>
-              <MainTitleText> 오늘 점심 뭐 먹지? </MainTitleText>
-              <SuvTitleText> 서울시 점메추 룰렛 </SuvTitleText>
-            </MainTitle>
+            {/* 추천 창 1 */}
+            <RecomandationWrap>
+              <TopWrap>
+                <h1> [API] 추천 음식 1 </h1>
+              </TopWrap>
 
-            {/* 게임 */}
+              <ImgWrap>
+                {/* [API] 식당이미지 슬라이드 */}
+
+                <div>{/* [API] 식당이미지1 */}</div>
+                <div>{/* [API] 식당이미지2 */}</div>
+
+                {/* <div>  [API] 식당이미지3 </div>
+                <div>  [API] 식당이미지4  </div> */}
+              </ImgWrap>
+
+              <InformationWrap>
+                <h1 className="InformationText"> [API] 식당 이름 </h1>
+                <p className="InformationText">사이트 : [API]</p>
+                <p className="InformationText">(신) 주소 : [API]</p>
+                <p className="InformationText">(구) 주소 : [API]</p>
+              </InformationWrap>
+              <ViewDetails>
+                <h1> 상세보기 </h1>
+              </ViewDetails>
+            </RecomandationWrap>
+
+            {/* 추천 창 2 */}
+            <RecomandationWrap>
+              <TopWrap>
+                <h1> [API] 추천 음식 2 </h1>
+              </TopWrap>
+
+              <ImgWrap>
+                {/* [API] 식당이미지 슬라이드 */}
+
+                <div>{/* [API] 식당이미지1 */}</div>
+                <div>{/* [API] 식당이미지2 */}</div>
+
+                {/* <div>  [API] 식당이미지3 </div>
+                <div>  [API] 식당이미지4  </div> */}
+              </ImgWrap>
+
+              <InformationWrap>
+                <h1 className="InformationText"> [API] 식당 이름 </h1>
+                <p className="InformationText">주소 : [API]</p>
+                <p className="InformationText">영업시간 : [API]</p>
+                <p className="InformationText">연락처 : [API]</p>
+              </InformationWrap>
+              <ViewDetails>
+                <h1> 상세보기 </h1>
+              </ViewDetails>
+            </RecomandationWrap>
           </MainWrap>
 
           {/* 하단바 */}
