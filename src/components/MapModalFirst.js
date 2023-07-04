@@ -98,7 +98,7 @@ const AcctionImg = styled.img`
   }
 `;
 
-const MapModalFir = ({ openModal, closeModal }) => {
+const MapModalFir = ({ closeModal }) => {
   return (
     <ModalBackground>
       <Container>

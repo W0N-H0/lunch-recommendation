@@ -36,28 +36,21 @@ const TopBarWrap = styled.div`
   padding: 0px 20px;
 `;
 
-// 상단바-2
-const SecondBarWrap = styled(TopBarWrap)`
-  height: 5%;
-  background: white;
-  border-bottom: 0px;
-`;
-
 // 메인창
 const MainWrap = styled.div`
-  height: 80%;
-  background-color: white;
+  height: 85%;
+  background: linear-gradient(
+      135deg,
+      #ffdc79 0%,
+      rgba(255, 255, 255, 0.39) 79.69%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    #ffdf85;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-`;
-
-// 지도 이미지
-const MapImg = styled.img`
-  height: 550px;
-  width: 700px;
-  padding-bottom: 40px;
+  justify-content: space-evenly;
 `;
 
 // 하단바
@@ -98,13 +91,54 @@ const AcctionImg = styled.img`
   }
 `;
 
-const MapModalSec = ({ closeModal }) => {
+//제목 문구
+const TitleWrap = styled.div`
+  > h1 {
+    font-size: 3rem;
+    margin: 30px;
+  }
+`;
+
+// 후기 모음
+const ReviewPostWrap = styled.div`
+  display: flex;
+  > div {
+    width: 250px;
+    border: 3px solid black;
+    border-radius: 15px;
+    margin: 0 10px;
+    .reviewPostImg {
+      height: 200px;
+      border-bottom: 3px solid black;
+      background-color: ivory;
+    }
+    .reviewPostText {
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      background-color: white;
+      > h4 {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      > p {
+        font-size: 1.2rem;
+        color: #777;
+        display: flex;
+        padding: 0 10px;
+      }
+    }
+  }
+`;
+
+const BlogModal = ({ closeModal }) => {
   return (
     <ModalBackground>
       <Container>
         {/* 상단바-1 */}
         <TopBarWrap>
-          {/* 동작 버튼 */}
+          {/* 동작 버튼1 */}
           <AcctionBtnWrap>
             {/* 방향키 */}
             <AcctionBtn>
@@ -115,7 +149,7 @@ const MapModalSec = ({ closeModal }) => {
             </AcctionBtn>
           </AcctionBtnWrap>
 
-          {/* 동작 버튼 */}
+          {/* 동작 버튼2 */}
           <AcctionBtnWrap>
             <AcctionBtn>
               <AcctionImg src="/images/hide-btn.png" alt="hide button" />
@@ -130,14 +164,46 @@ const MapModalSec = ({ closeModal }) => {
             </AcctionBtn>
           </AcctionBtnWrap>
         </TopBarWrap>
-
-        {/* 일단 흰 배경으로 감춤.. 추후 없애는 편으로.. */}
-        <SecondBarWrap />
+        {/* 상단바 끝 */}
 
         {/* 메인창 */}
         <MainWrap>
-          <MapImg src="/images/map-img.png" alt="서울시 25개 지구" />
+          <TitleWrap>
+            <h1> [API] 식당 이름 </h1>
+            <h1> 식당 후기 보기 </h1>
+          </TitleWrap>
+          <ReviewPostWrap>
+            <div>
+              <div className="reviewPostImg"></div>
+              <div className="reviewPostText">
+                <h4>블로그 title</h4>
+                <p>dateTime</p>
+              </div>
+            </div>
+            <div>
+              <div className="reviewPostImg"></div>
+              <div className="reviewPostText">
+                <h4>블로그 title</h4>
+                <p>dateTime</p>
+              </div>
+            </div>
+            <div>
+              <div className="reviewPostImg"></div>
+              <div className="reviewPostText">
+                <h4>블로그 title</h4>
+                <p>dateTime</p>
+              </div>
+            </div>
+            <div>
+              <div className="reviewPostImg"></div>
+              <div className="reviewPostText">
+                <h4>블로그 title</h4>
+                <p>dateTime</p>
+              </div>
+            </div>
+          </ReviewPostWrap>
         </MainWrap>
+        {/* 메인창 끝 */}
 
         {/* 하단바 */}
         <FooterBarWrap>
@@ -151,4 +217,4 @@ const MapModalSec = ({ closeModal }) => {
   );
 };
 
-export default MapModalSec;
+export default BlogModal;

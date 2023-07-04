@@ -18,6 +18,7 @@ import schoolFood2 from "../img/schoolFood2.png";
 import schoolFood3 from "../img/schoolFood3.png";
 import MapModalFir from "../components/MapModalFirst";
 import MainModal from "../components/MainModal";
+import BlogModal from "../components/BlogModal";
 
 const deselectedOptions = [
   "강남구",
