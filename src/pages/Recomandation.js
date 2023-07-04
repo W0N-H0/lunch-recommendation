@@ -4,6 +4,7 @@ import Slots from "../components/Slots";
 import Menu from "../components/Menu";
 import MapModalSec from "../components/MapModalSec";
 import React, { useRef, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // useNavigate로 전달한 쿼리파라미터값(uri)을 사용하기 위한 훅
 //
 const BackgroundImage = styled.div`
   background-image: url("/images/background-recomandation.png");
@@ -206,13 +207,18 @@ const ViewDetails = styled.div`
 const Recomandation = () => {
   // axios로 받은 데이터를 저장해두는 상태
   const [data, setData] = useState([]);
+  // useNavigate로 전달한 쿼리파라미터의 값(uri)의 값을 활용하기 위한 변수선언
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const food = searchParams.get("food");
+  const inputValue = searchParams.get("inputValue");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("/v1/search/local.json", {
           params: {
-            query: "마포구 한식 맛집",
+            query: `${inputValue} ${food} 맛집`,
             display: 2,
           },
           headers: {
@@ -255,7 +261,9 @@ const Recomandation = () => {
               {/* 링크 느낌 구현 */}
               <LinkWrap>
                 <LinkBarWrap>
-                  <LinkBar>https:// 프로젝트.참숯가마</LinkBar>
+                  <LinkBar>
+                    https:// 프로젝트.참숯가마/{inputValue}_{food}_추천
+                  </LinkBar>
                   <AcctionImgStar src="/images/star.png" alt="bookmark" />
                 </LinkBarWrap>
 
@@ -352,10 +360,10 @@ const Recomandation = () => {
                     </a>
                   </p>
                   <p className="InformationText">
-                    (신) 주소 : {data[0].roadAddress}
+                    (신) 주소 : {data[1].roadAddress}
                   </p>
                   <p className="InformationText">
-                    (구) 주소 : {data[0].address}
+                    (구) 주소 : {data[1].address}
                   </p>
                 </InformationWrap>
                 <ViewDetails>
