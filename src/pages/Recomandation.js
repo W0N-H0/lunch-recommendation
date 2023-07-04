@@ -4,6 +4,7 @@ import Slots from "../components/Slots";
 import Menu from "../components/Menu";
 import MapModalSec from "../components/MapModalSec";
 import React, { useRef, useState, useEffect } from "react";
+import BlogModal from "../components/BlogModal";
 import { useLocation } from "react-router-dom"; // useNavigate로 전달한 쿼리파라미터값(uri)을 사용하기 위한 훅
 //
 const BackgroundImage = styled.div`
@@ -143,6 +144,7 @@ const RecomandationWrap = styled.div`
   border: 3px solid #000;
   width: 600px;
   margin: 20px 0;
+  position: relative;
 `;
 
 // 추천 음식
@@ -169,6 +171,11 @@ const ImgWrap = styled.div`
     border-radius: 10px;
     border: 3px solid #000;
     background: #fba;
+    > img {
+      width: 270px;
+      height: 230px;
+      border-radius: 5px;
+    }
   }
 `;
 
@@ -214,7 +221,7 @@ const ViewDetails = styled.div`
   width: 500px;
   background: #f2c198;
   position: absolute;
-  bottom: 155px;
+  bottom: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -225,6 +232,7 @@ const ViewDetails = styled.div`
 const Recomandation = () => {
   // axios로 받은 데이터를 저장해두는 상태
   const [data, setData] = useState([]);
+  const [image, setImage] = useState([]);
   // useNavigate로 전달한 쿼리파라미터의 값(uri)의 값을 활용하기 위한 변수선언
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -247,7 +255,6 @@ const Recomandation = () => {
         console.log(response);
 
         setData(response.data.items);
-        console.log(data);
       } catch (error) {
         let message = "Unknown Error";
         if (error instanceof Error) message = error.message;
@@ -258,9 +265,50 @@ const Recomandation = () => {
     fetchData();
   }, []);
 
+  // 이미지를 받아오는 API의 쿼리에 검색 API결과가 필요하기 때문에,
+  // 검색 API가 실행된 후 실행하기 위해 data(검색api 결과)가 변동이 있을때 이미지 API실행
+  useEffect(() => {
+    // 이미지를 받아오는 API
+    const fetchData2 = async () => {
+      try {
+        const response = await axios.get("/v1/search/image", {
+          params: {
+            query: `${data[0].title} 음식`,
+            display: 4,
+          },
+          headers: {
+            "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
+            "X-Naver-Client-Secret": "FBtejVg8km",
+          },
+        });
+        console.log(response);
+        setImage(response.data.items);
+      } catch (error) {
+        let message = "Unknown Error";
+        if (error instanceof Error) message = error.message;
+        console.log(message);
+      }
+    };
+
+    fetchData2();
+  }, [data]);
+
+  // 지역구 모달창
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+  console.log(image.length);
+
   return (
     <>
-      {data.length > 0 ? (
+      {/* 데이터 불러오기전 분기*/}
+      {data.length > 0 && image.length > 0 ? (
         <BackgroundImage>
           <Container>
             {/* 상단바-1 */}
@@ -304,10 +352,17 @@ const Recomandation = () => {
             {/* 상단바-2 */}
             <SecondBarWrap>
               <MapBtn>
-                {" "}
-                <MapText> 지역구 보러가기 </MapText>{" "}
+                <MapText onClick={openModal}> 지역구 보러가기 </MapText>
               </MapBtn>
             </SecondBarWrap>
+
+            {/* 모달창 띄우는 곳*/}
+
+            {showModal ? (
+              <MapModalSec openModal={openModal} closeModal={closeModal} />
+            ) : (
+              ""
+            )}
 
             {/* 메인창 */}
             <MainWrap>
@@ -320,8 +375,12 @@ const Recomandation = () => {
                 <ImgWrap>
                   {/* [API] 식당이미지 슬라이드 */}
 
-                  <div>{/* [API] 식당이미지1 */}</div>
-                  <div>{/* [API] 식당이미지2 */}</div>
+                  <div>
+                    <img src={image[0].thumbnail} alt="Thumbnail" />
+                  </div>
+                  <div>
+                    <img src={image[1].thumbnail} alt="Thumbnail" />
+                  </div>
 
                   {/* <div>  [API] 식당이미지3 </div>
                 <div>  [API] 식당이미지4  </div> */}
@@ -394,7 +453,8 @@ const Recomandation = () => {
               <div>I LOVE SEOUL</div>
             </FooterBarWrap>
           </Container>
-          <MapModalSec />
+          {/* <BlogModal /> */}
+
           <Menu />
         </BackgroundImage>
       ) : (
