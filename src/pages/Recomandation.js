@@ -204,145 +204,180 @@ const ViewDetails = styled.div`
 `;
 
 const Recomandation = () => {
-  const [items, setItems] = useState([]);
+  // axios로 받은 데이터를 저장해두는 상태
+  const [data, setData] = useState([]);
 
-  axios
-    .get("/v1/search/local.json", {
-      params: {
-        query: "마포구 한식 맛집",
-        display: 2,
-      },
-      headers: {
-        "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
-        "X-Naver-Client-Secret": "FBtejVg8km",
-      },
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      let message = "Unknown Error";
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/v1/search/local.json", {
+          params: {
+            query: "마포구 한식 맛집",
+            display: 2,
+          },
+          headers: {
+            "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
+            "X-Naver-Client-Secret": "FBtejVg8km",
+          },
+        });
+        console.log(response);
 
-      if (error instanceof Error) message = error.message;
-      console.log(message);
-    });
+        setData(response.data.items);
+        console.log(data);
+      } catch (error) {
+        let message = "Unknown Error";
+        if (error instanceof Error) message = error.message;
+        console.log(message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
-      <BackgroundImage>
-        <Container>
-          {/* 상단바-1 */}
-          <TopBarWrap>
-            {/* 동작 버튼 */}
-            <AcctionBtnWrap>
-              {/* 방향키 */}
-              <AcctionBtn>
-                <AcctionImg src="/images/left-btn.png" alt="back button" />
-              </AcctionBtn>
-              <AcctionBtn>
-                <AcctionImg src="/images/right-btn.png" alt="next button" />
-              </AcctionBtn>
-            </AcctionBtnWrap>
+      {data.length > 0 ? (
+        <BackgroundImage>
+          <Container>
+            {/* 상단바-1 */}
+            <TopBarWrap>
+              {/* 동작 버튼 */}
+              <AcctionBtnWrap>
+                {/* 방향키 */}
+                <AcctionBtn>
+                  <AcctionImg src="/images/left-btn.png" alt="back button" />
+                </AcctionBtn>
+                <AcctionBtn>
+                  <AcctionImg src="/images/right-btn.png" alt="next button" />
+                </AcctionBtn>
+              </AcctionBtnWrap>
 
-            {/* 링크 느낌 구현 */}
-            <LinkWrap>
-              <LinkBarWrap>
-                <LinkBar>https:// 프로젝트.참숯가마</LinkBar>
-                <AcctionImgStar src="/images/star.png" alt="bookmark" />
-              </LinkBarWrap>
+              {/* 링크 느낌 구현 */}
+              <LinkWrap>
+                <LinkBarWrap>
+                  <LinkBar>https:// 프로젝트.참숯가마</LinkBar>
+                  <AcctionImgStar src="/images/star.png" alt="bookmark" />
+                </LinkBarWrap>
 
-              <AcctionBtn>
-                <AcctionImg src="/images/btn.png" alt="reflash button" />
-              </AcctionBtn>
-            </LinkWrap>
+                <AcctionBtn>
+                  <AcctionImg src="/images/btn.png" alt="reflash button" />
+                </AcctionBtn>
+              </LinkWrap>
 
-            {/* 동작 버튼 */}
-            <AcctionBtnWrap>
-              <AcctionBtn>
-                <AcctionImg src="/images/hide-btn.png" alt="hide button" />
-              </AcctionBtn>
-              <AcctionBtn>
-                <AcctionImg src="/images/close-btn.png " alt="close button" />
-              </AcctionBtn>
-            </AcctionBtnWrap>
-          </TopBarWrap>
+              {/* 동작 버튼 */}
+              <AcctionBtnWrap>
+                <AcctionBtn>
+                  <AcctionImg src="/images/hide-btn.png" alt="hide button" />
+                </AcctionBtn>
+                <AcctionBtn>
+                  <AcctionImg src="/images/close-btn.png " alt="close button" />
+                </AcctionBtn>
+              </AcctionBtnWrap>
+            </TopBarWrap>
 
-          {/* 상단바-2 */}
-          <SecondBarWrap>
-            <MapBtn>
-              {" "}
-              <MapText> 지역구 보러가기 </MapText>{" "}
-            </MapBtn>
-          </SecondBarWrap>
+            {/* 상단바-2 */}
+            <SecondBarWrap>
+              <MapBtn>
+                {" "}
+                <MapText> 지역구 보러가기 </MapText>{" "}
+              </MapBtn>
+            </SecondBarWrap>
 
-          {/* 메인창 */}
-          <MainWrap>
-            {/* 추천 창 1 */}
-            <RecomandationWrap>
-              <TopWrap>
-                <h1> [API] 추천 음식 1 </h1>
-              </TopWrap>
+            {/* 메인창 */}
+            <MainWrap>
+              {/* 추천 창 1 */}
+              <RecomandationWrap>
+                <TopWrap>
+                  <h1> (추천1) {data[0].category} </h1>
+                </TopWrap>
 
-              <ImgWrap>
-                {/* [API] 식당이미지 슬라이드 */}
+                <ImgWrap>
+                  {/* [API] 식당이미지 슬라이드 */}
 
-                <div>{/* [API] 식당이미지1 */}</div>
-                <div>{/* [API] 식당이미지2 */}</div>
+                  <div>{/* [API] 식당이미지1 */}</div>
+                  <div>{/* [API] 식당이미지2 */}</div>
 
-                {/* <div>  [API] 식당이미지3 </div>
+                  {/* <div>  [API] 식당이미지3 </div>
                 <div>  [API] 식당이미지4  </div> */}
-              </ImgWrap>
+                </ImgWrap>
 
-              <InformationWrap>
-                <h1 className="InformationText"> [API] 식당 이름 </h1>
-                <p className="InformationText">사이트 : [API]</p>
-                <p className="InformationText">(신) 주소 : [API]</p>
-                <p className="InformationText">(구) 주소 : [API]</p>
-              </InformationWrap>
-              <ViewDetails>
-                <h1> 상세보기 </h1>
-              </ViewDetails>
-            </RecomandationWrap>
+                <InformationWrap>
+                  <h1 className="InformationText">
+                    {" "}
+                    (업체명) {data[0].title}{" "}
+                  </h1>
+                  <p className="InformationText">
+                    사이트 :{" "}
+                    <a target="_blank" href={data[0].link}>
+                      {data[0].link}
+                    </a>
+                  </p>
+                  <p className="InformationText">
+                    (신) 주소 : {data[0].roadAddress}
+                  </p>
+                  <p className="InformationText">
+                    (구) 주소 : {data[0].address}
+                  </p>
+                </InformationWrap>
+                <ViewDetails>
+                  <h1> 상세보기 </h1>
+                </ViewDetails>
+              </RecomandationWrap>
 
-            {/* 추천 창 2 */}
-            <RecomandationWrap>
-              <TopWrap>
-                <h1> [API] 추천 음식 2 </h1>
-              </TopWrap>
+              {/* 추천 창 2 */}
+              <RecomandationWrap>
+                <TopWrap>
+                  <h1> (추천2) {data[1].category} </h1>
+                </TopWrap>
 
-              <ImgWrap>
-                {/* [API] 식당이미지 슬라이드 */}
+                <ImgWrap>
+                  {/* [API] 식당이미지 슬라이드 */}
 
-                <div>{/* [API] 식당이미지1 */}</div>
-                <div>{/* [API] 식당이미지2 */}</div>
+                  <div>{/* [API] 식당이미지1 */}</div>
+                  <div>{/* [API] 식당이미지2 */}</div>
 
-                {/* <div>  [API] 식당이미지3 </div>
+                  {/* <div>  [API] 식당이미지3 </div>
                 <div>  [API] 식당이미지4  </div> */}
-              </ImgWrap>
+                </ImgWrap>
 
-              <InformationWrap>
-                <h1 className="InformationText"> [API] 식당 이름 </h1>
-                <p className="InformationText">주소 : [API]</p>
-                <p className="InformationText">영업시간 : [API]</p>
-                <p className="InformationText">연락처 : [API]</p>
-              </InformationWrap>
-              <ViewDetails>
-                <h1> 상세보기 </h1>
-              </ViewDetails>
-            </RecomandationWrap>
-          </MainWrap>
+                <InformationWrap>
+                  <h1 className="InformationText">
+                    {" "}
+                    (업체명) {data[1].title}{" "}
+                  </h1>
+                  <p className="InformationText">
+                    사이트 :{" "}
+                    <a target="_blank" href={data[1].link}>
+                      {data[1].link}
+                    </a>
+                  </p>
+                  <p className="InformationText">
+                    (신) 주소 : {data[0].roadAddress}
+                  </p>
+                  <p className="InformationText">
+                    (구) 주소 : {data[0].address}
+                  </p>
+                </InformationWrap>
+                <ViewDetails>
+                  <h1> 상세보기 </h1>
+                </ViewDetails>
+              </RecomandationWrap>
+            </MainWrap>
 
-          {/* 하단바 */}
-          <FooterBarWrap>
-            <div>
-              <img src="/images/emojione-fire.png" alt="" />
-            </div>
-            <div>I LOVE SEOUL</div>
-          </FooterBarWrap>
-        </Container>
-        <MapModalSec />
-        <Menu />
-      </BackgroundImage>
+            {/* 하단바 */}
+            <FooterBarWrap>
+              <div>
+                <img src="/images/emojione-fire.png" alt="" />
+              </div>
+              <div>I LOVE SEOUL</div>
+            </FooterBarWrap>
+          </Container>
+          <MapModalSec />
+          <Menu />
+        </BackgroundImage>
+      ) : (
+        <div>데이터를 불러오는 중입니다..</div>
+      )}
     </>
   );
 };
