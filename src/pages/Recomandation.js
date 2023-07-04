@@ -185,8 +185,24 @@ const InformationWrap = styled.div`
   > p {
     font-size: 1.2rem;
   }
+  > div {
+    font-size: 1.2rem;
+  }
   .InformationText {
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
     margin: 10px;
+  }
+  .address1 {
+    width: 110px;
+    line-height: 1.8rem;
+  }
+  .address2 {
+    width: 430px;
+    line-height: 1.8rem;
   }
 `;
 
@@ -197,10 +213,12 @@ const ViewDetails = styled.div`
   height: 60px;
   width: 500px;
   background: #f2c198;
+  position: absolute;
+  bottom: 155px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: auto;
+  margin: 20px 47px 20px 47px;
   cursor: pointer;
 `;
 
@@ -320,9 +338,10 @@ const Recomandation = () => {
                       {data[0].link}
                     </a>
                   </p>
-                  <p className="InformationText">
-                    (신) 주소 : {data[0].roadAddress}
-                  </p>
+                  <div className="InformationText">
+                    <div className="address1">(신) 주소 :</div>{" "}
+                    <div className="address2">{data[0].roadAddress}</div>
+                  </div>
                 </InformationWrap>
                 <ViewDetails>
                   <h1> 상세보기 </h1>
@@ -356,9 +375,10 @@ const Recomandation = () => {
                       {data[1].link}
                     </a>
                   </p>
-                  <p className="InformationText">
-                    (신) 주소 : {data[1].roadAddress}
-                  </p>
+                  <div className="InformationText">
+                    <div className="address1">(신) 주소 :</div>{" "}
+                    <div className="address2">{data[1].roadAddress}</div>
+                  </div>
                 </InformationWrap>
                 <ViewDetails>
                   <h1> 상세보기 </h1>
