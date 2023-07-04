@@ -7,7 +7,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom"; // useNavigate로 전달한 쿼리파라미터값(uri)을 사용하기 위한 훅
 //
 const BackgroundImage = styled.div`
-  background-image: url("/images/background-recomandation.png");
+  background-image: url("/images/racomandation.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -323,9 +323,6 @@ const Recomandation = () => {
                   <p className="InformationText">
                     (신) 주소 : {data[0].roadAddress}
                   </p>
-                  <p className="InformationText">
-                    (구) 주소 : {data[0].address}
-                  </p>
                 </InformationWrap>
                 <ViewDetails>
                   <h1> 상세보기 </h1>
@@ -361,9 +358,6 @@ const Recomandation = () => {
                   </p>
                   <p className="InformationText">
                     (신) 주소 : {data[1].roadAddress}
-                  </p>
-                  <p className="InformationText">
-                    (구) 주소 : {data[1].address}
                   </p>
                 </InformationWrap>
                 <ViewDetails>
