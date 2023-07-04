@@ -123,7 +123,7 @@ const AcctionImg = styled.img`
   }
 `;
 
-const MainModal = ({ food1, result, handleClick }) => {
+const MainModal = ({ inputValue, food1, result, handleClick }) => {
   let food = "";
   let foodImageName = "";
   switch (true) {
@@ -155,7 +155,11 @@ const MainModal = ({ food1, result, handleClick }) => {
   const navigate = useNavigate();
 
   const goToRecomandation = () => {
-    navigate("/Recomandation");
+    navigate(
+      `/Recomandation?inputValue=${encodeURIComponent(
+        inputValue
+      )}&food=${encodeURIComponent(food)}`
+    );
   };
 
   return (

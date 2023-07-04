@@ -311,7 +311,7 @@ const Main = () => {
     console.log("Result:", result);
   };
 
-  // // 지역구 모달창
+  // 지역구 모달창
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -325,7 +325,6 @@ const Main = () => {
   // 자동완성 구현
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState(deselectedOptions);
-
   return (
     <>
       <BackgroundImage>
@@ -418,7 +417,12 @@ const Main = () => {
 
         {/* ★[추가] visibleModal 값이 true && result(룰렛이 다돌아간 상태를 저장) 이 true 일 때만 MainModal 컴포넌트를 표시 */}
         {visibleModal && result && (
-          <MainModal food1={food1} result={result} handleClick={handleClick} />
+          <MainModal
+            inputValue={inputValue}
+            food1={food1}
+            result={result}
+            handleClick={handleClick}
+          />
         )}
       </BackgroundImage>
     </>
