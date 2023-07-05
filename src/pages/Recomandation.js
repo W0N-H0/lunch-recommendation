@@ -303,7 +303,17 @@ const Recomandation = () => {
   const closeModal = () => {
     setShowModal(false);
   };
-  console.log(image.length);
+
+  // 상세보기 모달창
+  const [showReview, setShowReview] = useState(false);
+
+  const openReview = () => {
+    setShowReview(true);
+  };
+
+  const closeReview = () => {
+    setShowReview(false);
+  };
 
   return (
     <>
@@ -357,7 +367,6 @@ const Recomandation = () => {
             </SecondBarWrap>
 
             {/* 모달창 띄우는 곳*/}
-
             {showModal ? (
               <MapModalSec openModal={openModal} closeModal={closeModal} />
             ) : (
@@ -402,7 +411,7 @@ const Recomandation = () => {
                     <div className="address2">{data[0].roadAddress}</div>
                   </div>
                 </InformationWrap>
-                <ViewDetails>
+                <ViewDetails onClick={openReview}>
                   <h1> 상세보기 </h1>
                 </ViewDetails>
               </RecomandationWrap>
@@ -439,11 +448,19 @@ const Recomandation = () => {
                     <div className="address2">{data[1].roadAddress}</div>
                   </div>
                 </InformationWrap>
-                <ViewDetails>
+                <ViewDetails onClick={openReview}>
                   <h1> 상세보기 </h1>
                 </ViewDetails>
               </RecomandationWrap>
+
+              {/* 상세보기 띄우는 곳*/}
+              {showReview ? (
+                <BlogModal openReview={openReview} closeReview={closeReview} />
+              ) : (
+                ""
+              )}
             </MainWrap>
+            {/* 메인창 끝 */}
 
             {/* 하단바 */}
             <FooterBarWrap>
