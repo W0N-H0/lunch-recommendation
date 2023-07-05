@@ -85,6 +85,7 @@ const AcctionBtn = styled.button`
 const AcctionImg = styled.img`
   width: 40px;
   height: 40px;
+  display: flex;
   .closeButton {
     background-color: black;
     cursor: pointer;
@@ -132,7 +133,7 @@ const ReviewPostWrap = styled.div`
   }
 `;
 
-const BlogModal = ({ closeModal }) => {
+const BlogModal = ({ closeReview }) => {
   return (
     <ModalBackground>
       <Container>
@@ -159,7 +160,7 @@ const BlogModal = ({ closeModal }) => {
                 src="/images/close-btn.png "
                 alt="close button"
                 className="closeButton"
-                onClick={closeModal}
+                onClick={closeReview}
               />
             </AcctionBtn>
           </AcctionBtnWrap>

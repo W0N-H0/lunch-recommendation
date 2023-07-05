@@ -92,6 +92,7 @@ const AcctionBtn = styled.button`
 const AcctionImg = styled.img`
   width: 40px;
   height: 40px;
+  display: flex;
   .closeButton {
     background-color: black;
     cursor: pointer;

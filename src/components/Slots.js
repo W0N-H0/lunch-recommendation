@@ -89,6 +89,12 @@ export const DropDownContainer = styled.ul`
     }
   }
 `;
+
+export const SeoulClickWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 // 자동완성 CSS 끝
 
 function Slots({
@@ -288,14 +294,22 @@ function Slots({
       <GameWarp slotRefs={slotRefs} foods={foods}></GameWarp>
 
       <div className="subWarp">
-        <div className="regionSelect">
-          <select className="select">
-            <option disabled selected>
-              지역 선택
-            </option>
-            <option value="seoul"> 서울시</option>
-          </select>
-        </div>
+        <SeoulClickWrap>
+          <div className="regionSelect">
+            <select className="select">
+              <option disabled selected>
+                서울시
+              </option>
+              <option value="seoul"> 서울시</option>
+            </select>
+          </div>
+          {/* 서울시 선택 안내문구 */}
+          <div>
+            <p>서울시 지역에서 추천이 가능합니다.</p>
+          </div>
+        </SeoulClickWrap>
+        {/* 서울시 선택 안내문구 */}
+
         <RollContainer rolling={rolling} roll={roll} />
 
         <div className="dropDownContainer">
