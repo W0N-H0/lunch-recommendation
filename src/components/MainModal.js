@@ -118,9 +118,7 @@ const AcctionBtn = styled.button`
 const AcctionImg = styled.img`
   width: 40px;
   height: 40px;
-  .closeButton {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 const MainModal = ({ inputValue, food1, result, handleClick }) => {

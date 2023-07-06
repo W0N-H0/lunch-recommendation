@@ -1,5 +1,11 @@
 import React from "react";
 import loading from "../img/loading.gif";
+import styled from "styled-components";
+
+const ClickVideo = styled.img`
+  width:230px;
+  height:80px;
+`
 //
 const RollContainer = ({ rolling, roll }) => {
   return (
@@ -10,7 +16,7 @@ const RollContainer = ({ rolling, roll }) => {
         disabled={rolling}
       >
         {rolling ? (
-          <img className="loading" src={loading} alt="loading gif" />
+          <ClickVideo src={loading} alt="loading gif" />
         ) : (
           "C L I C K !"
         )}
