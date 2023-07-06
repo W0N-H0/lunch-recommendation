@@ -16,62 +16,229 @@ import japaneseFood3 from "../img/japaneseFood3.png";
 import schoolFood1 from "../img/schoolFood1.png";
 import schoolFood2 from "../img/schoolFood2.png";
 import schoolFood3 from "../img/schoolFood3.png";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 //~91줄까지 자동완성을 위한 CSS
 const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
 
-export const InputContainer = styled.div`
-  background-color: #fff2e9;
-  margin: 3px 0px 0px 50px;
+const blinkingText = keyframes`
+  0% {
+    color: #000;
+  }
+  49% {
+    color: #000;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
+  }
+`
+
+export const MainGame = styled.div`
+  height: 410px;
+  width: 1000px;
+  background: #fbe1d2;
+  border: 3px solid black;
+  border-radius: 10px;
   display: flex;
-  flex-direction: row;
-  padding: 1rem;
-  border: 2px solid black;
-  border-radius: 5px;
-  z-index: 3;
+  flex-direction: column;
+  align-items: center;
 
-  &:focus-within {
-    box-shadow: 0 0 0 0.5px black;
+  // 상단 랜덤 슬롯 상자
+  div.GameWarp {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0 17px 0;
+    div.SlotMachine{
+      background: #ffebe7;
+      width: 800px;
+      height: 215px;
+      border: 3px solid black;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: 10px;
+      /* color: red; */
+      div.slotContainer {
+        background-color: #f5d3bf;
+        width: 700px;
+        height: 147px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        border: 3px solid black !important;
+        padding: 7px 5px 0 0px;
+        img.coin1 {
+          position: absolute;
+          top: 90px;
+          left: 27px;
+          width: 35px;
+          height: 35px;
+        }
+        img.coin2 {
+          position: absolute;
+          top: 90px;
+          left: 737px;
+          width: 35px;
+          height: 35px;
+        }
+        div.line {
+          position: absolute;
+          top: 106px;
+          left: 65px;
+          width: 670px;
+          height: 35px;
+          border-top: 3px dashed #d29a8c;
+          z-index: 1;
+        }
+        div.slot {
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          height: 150px;
+          width: 200px;
+          margin: 0px 20px 10px 10px;
+          section {
+            position: absolute;
+            background-color: white;
+            width: 210px;
+            height: 154px;
+            border-radius: 2px !important;
+            border-left: 3px solid black !important;
+            border-right: 3px solid black !important;
+            overflow: hidden;
+            text-align: center;
+            font-size: 25px;
+            div.container {
+              position: absolute;
+              top: 2px;
+              width: 100%;
+              margin: 40px 0 0 0;
+              transition: top 0.5s ease;
+              text-align: center;
+              z-index: 2;
+              img {
+                width: 110px;
+                height: 90px;
+              }
+            }
+          }
+        }     
+      }
+    }
   }
+  // 하단 랜덤 셀렉트 상자
+  div.subWarp {
+    width:1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    div.regionSelect {
+        margin: 0 50px;
+      select {
+        background-color: #fff2e9;
+        width: 200px;
+        height: 50px;
+        border: 2px solid black;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        padding:10px;
+        cursor: pointer;
+        &:focus {
+          border-color: black;
+          box-shadow: 0 0 0 0.5px black;
+          color: black;
+          outline: none;
+        }
+        option {
+          border-radius: 5px;
+        }
 
-  > input {
-    background-color: transparent;
-    border: none;
-    margin: 0;
-    padding: 0;
-    outline: none;
-    font-size: 1.2rem;
-    width: 171px;
-    letter-spacing: 1px;
-  }
-
-  > div.delete-button {
-    cursor: pointer;
-    font-size: 1.25rem;
+      }
+    }
+    div.rollContainer {
+      //
+      div.roll {
+        background-color: #f9b2a6;
+        width: 230px;
+        height: 80px;
+        border: 2px solid black;
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        animation: ${blinkingText} 1.3s ease infinite;
+        font-size: 1.8rem;
+        &:hover{
+          background-color: #ea8573;
+          transition: 0.5s;
+        }
+      }
+    }
+    div.dropDownContainer {
+      box-sizing:border-box;
+      margin : 0 50px;
+      background-color: #fff2e9;
+      width:200px;
+      height:50px;
+      border: 2px solid black;
+      border-radius: 5px;
+      display:flex;
+      div.inputContainer{
+        display: flex;
+        margin-left:10px;
+        align-items: center;
+        z-index: 3;
+        &:focus-within {
+          box-shadow: 0 0 0 0.5px black;
+        }
+        input {
+          box-sizing:border-box;
+          background-color: transparent;
+          border: none;
+          outline: none;
+          font-size: 1.2rem;
+          width: 171px;
+          letter-spacing: 1px;
+          margin:0 -20px 0 10px;
+        }
+        
+        div.deleteButton {
+          cursor: pointer;
+          font-size: 1.25rem;
+        }
+      }
+    }
   }
 `;
 
+
+// 지역구 입력값 보여주는 li
 export const DropDownContainer = styled.ul`
   background-color: #fff2e9;
-  position: absolute;
+  position:absolute;
+  top: 10px;
   width: 210px;
   top: 760px;
-  transform: translateX(49.5px);
-  margin-left: auto;
-  margin-right: auto;
   list-style-type: none;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 0px;
   margin-top: -1px;
   padding: 0.5rem 0 0 0.25rem;
   border: 2.2px solid black;
   border-radius: 5px;
   box-shadow: ${boxShadow};
-  z-index: 3;
+  z-index: 999;
 
   > li {
     padding: 0 0.7rem;
@@ -90,10 +257,6 @@ export const DropDownContainer = styled.ul`
   }
 `;
 
-export const SeoulClickWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 // 자동완성 CSS 끝
 
@@ -290,30 +453,26 @@ function Slots({
   };
 
   return (
-    <div className="MainGame">
+    <MainGame>
       <GameWarp slotRefs={slotRefs} foods={foods}></GameWarp>
 
+      {/* 1번 */}
       <div className="subWarp">
-        <SeoulClickWrap>
-          <div className="regionSelect">
-            <select className="select">
-              <option disabled selected>
-                서울시
-              </option>
-              <option value="seoul"> 서울시</option>
-            </select>
-          </div>
-          {/* 서울시 선택 안내문구 */}
-          <div>
-            <p>서울시 지역에서 추천이 가능합니다.</p>
-          </div>
-        </SeoulClickWrap>
-        {/* 서울시 선택 안내문구 */}
+        <div className="regionSelect">
+          <select className="select">
+            <option disabled selected>
+              서울시
+            </option>
+            <option value="seoul"> 서울시</option>
+          </select>
+        </div>
 
+        {/* 2번 */}
         <RollContainer rolling={rolling} roll={roll} />
 
+        {/* 3번 */}
         <div className="dropDownContainer">
-          <InputContainer>
+          <div className="inputContainer">
             <input
               type="text"
               placeholder="지역구 입력"
@@ -321,10 +480,13 @@ function Slots({
               onChange={handleInputChange}
               onKeyDown={handleKeyUp}
             ></input>
-            <div className="delete-button" onClick={handleDeleteButtonClick}>
+            <div className="deleteButton" onClick={handleDeleteButtonClick}>
               X
             </div>
-          </InputContainer>
+          </div>
+          {/* <div>
+            <p>서울시 지역에서 추천이 가능합니다.</p>
+          </div> */}
 
           {!hasText || !showDropdown ? null : (
             <DropDown
@@ -335,7 +497,7 @@ function Slots({
           )}
         </div>
       </div>
-    </div>
+    </MainGame>
   );
 }
 

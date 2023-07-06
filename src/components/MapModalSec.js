@@ -93,10 +93,7 @@ const AcctionImg = styled.img`
   width: 40px;
   height: 40px;
   display: flex;
-  .closeButton {
-    background-color: black;
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 const MapModalSec = ({ closeModal }) => {
