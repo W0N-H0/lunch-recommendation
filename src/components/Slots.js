@@ -339,7 +339,10 @@ function Slots({
 
     setTimeout(() => {
       clearInterval(rotationInterval);
-      setRolling(false);
+      // 슬롯 다돌고 결과 모달이 뜨기 전까지 delay를 주기 위한 코드
+      setTimeout(() => {
+        setRolling(false);
+      }, 850);
     }, totalRotations * 400);
   };
 
