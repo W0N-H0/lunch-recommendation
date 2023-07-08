@@ -198,20 +198,6 @@ const StyledSlider = styled(Slider)`
     bottom: 40px;
     margin: 0px;
   }
-
-  /* .slick-slide {
-    display: inline-block;
-  }
-
-  .slick-slide > div {
-    // 자식 안에 div
-    margin: 10px;
-    box-sizing: border-box;
-    > img {
-      width: 200px;
-      height: 300px;
-    }
-  } */
 `;
 
 const ImageContainer = styled.div`
@@ -455,78 +441,55 @@ const Recomandation = () => {
             {/* 메인창 */}
             <MainWrap>
               {/* 추천 창 1 */}
-              <RecomandationWrap>
-                <TopWrap>
-                  <h1> (추천1) {data[0].category} </h1>
-                </TopWrap>
-                <SliderContainer>
-                  <StyledSlider {...settings}>
-                    <div>
-                      <img src={image[0].thumbnail} alt="Thumbnail" />
+              {data.map((recommendation, index) => (
+                <RecomandationWrap key={index}>
+                  <TopWrap>
+                    <h1>
+                      {" "}
+                      (추천 {index + 1}) {recommendation.category}{" "}
+                    </h1>
+                  </TopWrap>
+                  <SliderContainer>
+                    <StyledSlider {...settings}>
+                      {/* 50개의 사진목록중 랜덤으로 5개 사진 뿌려줌 */}
+                      {(() => {
+                        const randomIndex = Math.floor(
+                          image.length * Math.random()
+                        );
+                        return image
+                          .slice(randomIndex, randomIndex + 5)
+                          .map((item, index) => (
+                            <div key={index}>
+                              <img src={item.thumbnail} alt="Thumbnail" />
+                            </div>
+                          ));
+                      })()}
+                    </StyledSlider>
+                  </SliderContainer>
+
+                  <InformationWrap>
+                    <h1 className="InformationText">
+                      {" "}
+                      {recommendation.title}{" "}
+                    </h1>
+                    <p className="InformationText">
+                      사이트 :
+                      <a target="_blank" href={recommendation.link}>
+                        {recommendation.link}
+                      </a>
+                    </p>
+                    <div className="InformationText">
+                      <div className="address1">(신)주소:</div>{" "}
+                      <div className="address2">
+                        {recommendation.roadAddress}
+                      </div>
                     </div>
-                    <div>
-                      <img src={image[1].thumbnail} alt="Thumbnail" />
-                    </div>
-                    <div>
-                      <img src={image[2].thumbnail} alt="Thumbnail" />
-                    </div>
-                    <div>
-                      <img src={image[3].thumbnail} alt="Thumbnail" />
-                    </div>
-                  </StyledSlider>
-                </SliderContainer>
-
-                <InformationWrap>
-                  <h1 className="InformationText"> {data[0].title} </h1>
-                  <p className="InformationText">
-                    사이트 :{" "}
-                    <a target="_blank" href={data[0].link}>
-                      {data[0].link}
-                    </a>
-                  </p>
-                  <div className="InformationText">
-                    <div className="address1">(신) 주소 :</div>{" "}
-                    <div className="address2">{data[0].roadAddress}</div>
-                  </div>
-                </InformationWrap>
-                <ViewDetails onClick={openReview}>
-                  <h1> 상세보기 </h1>
-                </ViewDetails>
-              </RecomandationWrap>
-
-              {/* 추천 창 2 */}
-              <RecomandationWrap>
-                <TopWrap>
-                  <h1> (추천2) {data[1].category} </h1>
-                </TopWrap>
-
-                <ImgWrap>
-                  {/* [API] 식당이미지 슬라이드 */}
-
-                  <div>{/* [API] 식당이미지1 */}</div>
-                  <div>{/* [API] 식당이미지2 */}</div>
-
-                  {/* <div>  [API] 식당이미지3 </div>
-                <div>  [API] 식당이미지4  </div> */}
-                </ImgWrap>
-
-                <InformationWrap>
-                  <h1 className="InformationText"> {data[1].title} </h1>
-                  <p className="InformationText">
-                    사이트 :{" "}
-                    <a target="_blank" href={data[1].link}>
-                      {data[1].link}
-                    </a>
-                  </p>
-                  <div className="InformationText">
-                    <div className="address1">(신) 주소 :</div>{" "}
-                    <div className="address2">{data[1].roadAddress}</div>
-                  </div>
-                </InformationWrap>
-                <ViewDetails onClick={openReview}>
-                  <h1> 상세보기 </h1>
-                </ViewDetails>
-              </RecomandationWrap>
+                  </InformationWrap>
+                  <ViewDetails onClick={openReview}>
+                    <h1> 상세보기 </h1>
+                  </ViewDetails>
+                </RecomandationWrap>
+              ))}
 
               {/* 상세보기 띄우는 곳*/}
               {showReview ? (
