@@ -6,7 +6,10 @@ import MapModalSec from "../components/MapModalSec";
 import React, { useRef, useState, useEffect } from "react";
 import BlogModal from "../components/BlogModal";
 import { useLocation } from "react-router-dom"; // useNavigate로 전달한 쿼리파라미터값(uri)을 사용하기 위한 훅
-//
+import "slick-carousel/slick/slick.css"; // 가로스크롤 캐러셀 구현을 위한 css
+import "slick-carousel/slick/slick-theme.css"; // 가로스크롤 캐러셀 구현을 위한 css
+import Slider from "react-slick"; // 가로스크롤 캐러셀 구현을 위한 컴포넌트
+
 const BackgroundImage = styled.div`
   background-image: url("/images/racomandation.png");
   background-repeat: no-repeat;
@@ -159,6 +162,44 @@ const TopWrap = styled.div`
   }
 `;
 
+// 가로스크롤
+const SliderContainer = styled.div`
+  margin: 10px 10px 10px 50px;
+  overflow: hidden;
+  height: 300px;
+  width: 500px;
+`;
+
+const StyledSlider = styled(Slider)`
+  height: 300px; //슬라이드 컨테이너 영역
+  width: 300px;
+  overflow: hidden;
+
+  .slick-slide {
+    display: inline-block;
+  }
+
+  .slick-slide > div {
+    // 자식 안에 div
+    margin: 10px;
+    box-sizing: border-box;
+    > img {
+      width: 200px;
+      height: 300px;
+    }
+  }
+`;
+
+const ImageContainer = styled.div`
+  margin: 0px 50px 0px 50px;
+`;
+
+const Image = styled.img`
+  width: 300px;
+  height: 170px;
+  object-fit: fill;
+`;
+
 // 추천 음식 사진
 const ImgWrap = styled.div`
   height: 230px;
@@ -252,6 +293,7 @@ const Recomandation = () => {
             "X-Naver-Client-Secret": "FBtejVg8km",
           },
         });
+
         console.log(response);
 
         setData(response.data.items);
@@ -264,6 +306,7 @@ const Recomandation = () => {
 
     fetchData();
   }, []);
+  console.log(data[0].title);
 
   // 이미지를 받아오는 API의 쿼리에 검색 API결과가 필요하기 때문에,
   // 검색 API가 실행된 후 실행하기 위해 data(검색api 결과)가 변동이 있을때 이미지 API실행
@@ -274,7 +317,7 @@ const Recomandation = () => {
         const response = await axios.get("/v1/search/image", {
           params: {
             query: `${data[0].title} 음식`,
-            display: 4,
+            display: 50,
           },
           headers: {
             "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
@@ -313,6 +356,18 @@ const Recomandation = () => {
 
   const closeReview = () => {
     setShowReview(false);
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    arrows: false,
+    centerMode: true,
+    cssEase: "linear",
+    autoplay: true,
   };
 
   return (
@@ -380,26 +435,25 @@ const Recomandation = () => {
                 <TopWrap>
                   <h1> (추천1) {data[0].category} </h1>
                 </TopWrap>
-
-                <ImgWrap>
-                  {/* [API] 식당이미지 슬라이드 */}
-
-                  <div>
-                    <img src={image[0].thumbnail} alt="Thumbnail" />
-                  </div>
-                  <div>
-                    <img src={image[1].thumbnail} alt="Thumbnail" />
-                  </div>
-
-                  {/* <div>  [API] 식당이미지3 </div>
-                <div>  [API] 식당이미지4  </div> */}
-                </ImgWrap>
+                <SliderContainer>
+                  <StyledSlider {...settings}>
+                    <div>
+                      <img src={image[0].thumbnail} alt="Thumbnail" />
+                    </div>
+                    <div>
+                      <img src={image[1].thumbnail} alt="Thumbnail" />
+                    </div>
+                    <div>
+                      <img src={image[2].thumbnail} alt="Thumbnail" />
+                    </div>
+                    <div>
+                      <img src={image[3].thumbnail} alt="Thumbnail" />
+                    </div>
+                  </StyledSlider>
+                </SliderContainer>
 
                 <InformationWrap>
-                  <h1 className="InformationText">
-                    {" "}
-                    (업체명) {data[0].title}{" "}
-                  </h1>
+                  <h1 className="InformationText"> {data[0].title} </h1>
                   <p className="InformationText">
                     사이트 :{" "}
                     <a target="_blank" href={data[0].link}>
@@ -433,10 +487,7 @@ const Recomandation = () => {
                 </ImgWrap>
 
                 <InformationWrap>
-                  <h1 className="InformationText">
-                    {" "}
-                    (업체명) {data[1].title}{" "}
-                  </h1>
+                  <h1 className="InformationText"> {data[1].title} </h1>
                   <p className="InformationText">
                     사이트 :{" "}
                     <a target="_blank" href={data[1].link}>
