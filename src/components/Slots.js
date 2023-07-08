@@ -335,14 +335,15 @@ function Slots({
           setFood3(foods[2][foodIndex]);
         }
       });
-    }, 500);
+    }, 400);
 
     setTimeout(() => {
       clearInterval(rotationInterval);
+
       // 슬롯 다돌고 결과 모달이 뜨기 전까지 delay를 주기 위한 코드
       setTimeout(() => {
         setRolling(false);
-      }, 850);
+      }, 400);
     }, totalRotations * 400);
   };
 
