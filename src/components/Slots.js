@@ -321,7 +321,6 @@ function Slots({
   }, [rolling, onSlotFinish]);
 
   const roll = () => {
-    onClick();
     const totalRotations = 10;
     setRolling(true);
 
@@ -335,15 +334,17 @@ function Slots({
           setFood3(foods[2][foodIndex]);
         }
       });
-    }, 400);
+    }, 500);
 
     setTimeout(() => {
       clearInterval(rotationInterval);
+      setRolling(false);
 
       // 슬롯 다돌고 결과 모달이 뜨기 전까지 delay를 주기 위한 코드
+
       setTimeout(() => {
-        setRolling(false);
-      }, 400);
+        onClick();
+      }, 800);
     }, totalRotations * 400);
   };
 
