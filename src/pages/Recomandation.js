@@ -283,30 +283,38 @@ const ViewDetails = styled.div`
 const Recomandation = () => {
   // axios로 받은 데이터를 저장해두는 상태
   const [data, setData] = useState([]);
-  const [image, setImage] = useState([]);
+  // 검색결과 데이터중 1번째 추천음식점 이미지를 저장해두는 useState
+  const [image1, setImage1] = useState([]);
+  // 검색결과 데이터중 2번째 추천음식점 이미지를 저장해두는 useState
+  const [image2, setImage2] = useState([]);
   // useNavigate로 전달한 쿼리파라미터의 값(uri)의 값을 활용하기 위한 변수선언
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const food = searchParams.get("food");
   const inputValue = searchParams.get("inputValue");
 
+  // 검색결과 5개중 랜덤으로 2개를 뽑기 위한 작업
+  const getRandomItems = (array, count) => {
+    const shuffled = array.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("/v1/search/local.json", {
           params: {
-            query: `${inputValue} ${food} 맛집`,
-            display: 2,
+            query: `${inputValue} ${food} `,
+            display: 5,
           },
           headers: {
             "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
             "X-Naver-Client-Secret": "FBtejVg8km",
           },
         });
-
-        console.log(response);
-
-        setData(response.data.items);
+        const randomItems = getRandomItems(response.data.items, 2);
+        setData(randomItems);
+        console.log(response.data);
       } catch (error) {
         let message = "Unknown Error";
         if (error instanceof Error) message = error.message;
@@ -320,13 +328,14 @@ const Recomandation = () => {
   // 이미지를 받아오는 API의 쿼리에 검색 API결과가 필요하기 때문에,
   // 검색 API가 실행된 후 실행하기 위해 data(검색api 결과)가 변동이 있을때 이미지 API실행
   useEffect(() => {
-    // 이미지를 받아오는 API
+    // 첫번째(data[0] 검색결과 이미지를 받아오는 API
     const fetchData2 = async () => {
       try {
         const response = await axios.get("/v1/search/image", {
           params: {
-            query: `${data[0].title} 음식`,
-            display: 50,
+            query: `${data[0].title}내돈내산`,
+            display: 5,
+            sort: "sim",
           },
           headers: {
             "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
@@ -334,7 +343,32 @@ const Recomandation = () => {
           },
         });
         console.log(response);
-        setImage(response.data.items);
+
+        setImage1(response.data.items);
+      } catch (error) {
+        let message = "Unknown Error";
+        if (error instanceof Error) message = error.message;
+        console.log(message);
+      }
+    };
+
+    // 두번째(data[1] 검색결과 이미지를 받아오는 API
+    const fetchData3 = async () => {
+      try {
+        const response = await axios.get("/v1/search/image", {
+          params: {
+            query: `${data[1].title}내돈내산`,
+            display: 5,
+            sort: "sim",
+          },
+          headers: {
+            "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
+            "X-Naver-Client-Secret": "FBtejVg8km",
+          },
+        });
+        console.log(response);
+
+        setImage2(response.data.items);
       } catch (error) {
         let message = "Unknown Error";
         if (error instanceof Error) message = error.message;
@@ -343,6 +377,7 @@ const Recomandation = () => {
     };
 
     fetchData2();
+    fetchData3();
   }, [data]);
 
   // 지역구 모달창
@@ -383,7 +418,7 @@ const Recomandation = () => {
   return (
     <>
       {/* 데이터 불러오기전 분기*/}
-      {data.length > 0 && image.length > 0 ? (
+      {data.length > 0 && image1.length > 0 ? (
         <BackgroundImage>
           <Container>
             {/* 상단바-1 */}
@@ -441,29 +476,31 @@ const Recomandation = () => {
             {/* 메인창 */}
             <MainWrap>
               {/* 추천 창 1 */}
+
               {data.map((recommendation, index) => (
                 <RecomandationWrap key={index}>
                   <TopWrap>
                     <h1>
-                      {" "}
                       (추천 {index + 1}) {recommendation.category}{" "}
                     </h1>
                   </TopWrap>
                   <SliderContainer>
                     <StyledSlider {...settings}>
-                      {/* 50개의 사진목록중 랜덤으로 5개 사진 뿌려줌 */}
-                      {(() => {
-                        const randomIndex = Math.floor(
-                          image.length * Math.random()
-                        );
-                        return image
-                          .slice(randomIndex, randomIndex + 5)
-                          .map((item, index) => (
-                            <div key={index}>
-                              <img src={item.thumbnail} alt="Thumbnail" />
-                            </div>
-                          ));
-                      })()}
+                      {/* 50개의 사진목록중 랜덤으로 5개 사진 뿌려줌 (조건부 랜더링으로) */}
+                      {index === 0 &&
+                        image1.slice(0, 5).map((item, index) => (
+                          <div key={index}>
+                            <img src={item.thumbnail} alt="Thumbnail" />
+                          </div>
+                        ))}
+
+                      {/* 2번째 음식점 사진 랜더링 */}
+                      {index === 1 &&
+                        image2.slice(0, 5).map((item, index) => (
+                          <div key={index}>
+                            <img src={item.thumbnail} alt="Thumbnail" />
+                          </div>
+                        ))}
                     </StyledSlider>
                   </SliderContainer>
 
