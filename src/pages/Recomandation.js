@@ -164,18 +164,42 @@ const TopWrap = styled.div`
 
 // 가로스크롤
 const SliderContainer = styled.div`
-  margin: 10px 10px 10px 50px;
+  margin: 10px 10px 0px 17px;
+  border-radius: 10px;
   overflow: hidden;
-  height: 300px;
-  width: 500px;
+  height: 260px;
+  width: 560px;
 `;
 
 const StyledSlider = styled(Slider)`
-  height: 300px; //슬라이드 컨테이너 영역
-  width: 300px;
-  overflow: hidden;
+  height: 300px;
+  width: 100%;
+  position: relative;
 
-  .slick-slide {
+  .slick-slide div {
+    //슬라이더  컨텐츠
+    cursor: pointer;
+  }
+
+  .slick-list {
+    background-color: #ffe9da;
+  }
+
+  .slick-slide img {
+    width: 258px;
+    height: 230px;
+    border-radius: 10px;
+    border: 3px solid black;
+    // 이미지 시작점 설정을 위한 마진
+    margin-left: 130px;
+  }
+
+  .slick-dots {
+    bottom: 40px;
+    margin: 0px;
+  }
+
+  /* .slick-slide {
     display: inline-block;
   }
 
@@ -187,7 +211,7 @@ const StyledSlider = styled(Slider)`
       width: 200px;
       height: 300px;
     }
-  }
+  } */
 `;
 
 const ImageContainer = styled.div`
@@ -196,7 +220,7 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
   width: 300px;
-  height: 170px;
+  height: 140px;
   object-fit: fill;
 `;
 
@@ -222,7 +246,7 @@ const ImgWrap = styled.div`
 
 // 추천 정보
 const InformationWrap = styled.div`
-  margin: 10px;
+  margin: 0 10px 10px 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -306,7 +330,6 @@ const Recomandation = () => {
 
     fetchData();
   }, []);
-  console.log(data[0].title);
 
   // 이미지를 받아오는 API의 쿼리에 검색 API결과가 필요하기 때문에,
   // 검색 API가 실행된 후 실행하기 위해 data(검색api 결과)가 변동이 있을때 이미지 API실행
@@ -361,13 +384,14 @@ const Recomandation = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
-    slidesToShow: 2,
+    speed: 600,
+    slidesToShow: 1.6,
     slidesToScroll: 1,
     arrows: false,
     centerMode: true,
     cssEase: "linear",
     autoplay: true,
+    pauseOnHover: true,
   };
 
   return (
