@@ -329,12 +329,12 @@ const Recomandation = () => {
   // 검색 API가 실행된 후 실행하기 위해 data(검색api 결과)가 변동이 있을때 이미지 API실행
   useEffect(() => {
     // 첫번째(data[0] 검색결과 이미지를 받아오는 API
-    const fetchData2 = async () => {
+    const imageData1 = async () => {
       try {
         const response = await axios.get("/v1/search/image", {
           params: {
-            query: `${data[0].title}내돈내산`,
-            display: 5,
+            query: `${data[0].title}메뉴`,
+            display: 50,
             sort: "sim",
           },
           headers: {
@@ -353,12 +353,12 @@ const Recomandation = () => {
     };
 
     // 두번째(data[1] 검색결과 이미지를 받아오는 API
-    const fetchData3 = async () => {
+    const imageData2 = async () => {
       try {
         const response = await axios.get("/v1/search/image", {
           params: {
-            query: `${data[1].title}내돈내산`,
-            display: 5,
+            query: `${data[1].title}메뉴`,
+            display: 50,
             sort: "sim",
           },
           headers: {
@@ -376,8 +376,36 @@ const Recomandation = () => {
       }
     };
 
-    fetchData2();
-    fetchData3();
+    imageData1();
+    imageData2();
+  }, [data]);
+
+  // 블로그 api받아오는 코드
+  const [blogData, setblogData] = useState();
+  useEffect(() => {
+    const fetchblogData = async () => {
+      try {
+        const response = await axios.get("/v1/search/blog.json", {
+          params: {
+            query: `${data[0].title} 내돈내산`,
+            display: 4,
+          },
+          headers: {
+            "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
+            "X-Naver-Client-Secret": "FBtejVg8km",
+          },
+        });
+
+        setblogData(response.data.items);
+        console.log(response);
+      } catch (error) {
+        let message = "Unknown Error";
+        if (error instanceof Error) message = error.message;
+        console.log(message);
+      }
+    };
+
+    fetchblogData();
   }, [data]);
 
   // 지역구 모달창
@@ -530,7 +558,11 @@ const Recomandation = () => {
 
               {/* 상세보기 띄우는 곳*/}
               {showReview ? (
-                <BlogModal openReview={openReview} closeReview={closeReview} />
+                <BlogModal
+                  openReview={openReview}
+                  closeReview={closeReview}
+                  blogData={blogData}
+                />
               ) : (
                 ""
               )}

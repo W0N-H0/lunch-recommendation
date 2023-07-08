@@ -134,7 +134,7 @@ const ReviewPostWrap = styled.div`
   }
 `;
 
-const BlogModal = ({ closeReview }) => {
+const BlogModal = ({ closeReview, blogData }) => {
   return (
     <ModalBackground>
       <Container>
@@ -177,10 +177,14 @@ const BlogModal = ({ closeReview }) => {
           <ReviewPostWrap>
             <div>
               <div className="reviewPostImg"></div>
-              <div className="reviewPostText">
-                <h4>블로그 title</h4>
-                <p>dateTime</p>
-              </div>
+              <a
+                target="_blank"
+                href={blogData[0].link}
+                className="reviewPostText"
+              >
+                <h4>{blogData[0].title}</h4>
+                <p>{blogData[0].postdate}</p>
+              </a>
             </div>
             <div>
               <div className="reviewPostImg"></div>
