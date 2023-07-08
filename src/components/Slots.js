@@ -37,7 +37,7 @@ const blinkingText = keyframes`
   100% {
     color: #000;
   }
-`
+`;
 
 export const MainGame = styled.div`
   height: 410px;
@@ -54,7 +54,7 @@ export const MainGame = styled.div`
     display: flex;
     flex-direction: column;
     margin: 20px 0 17px 0;
-    div.SlotMachine{
+    div.SlotMachine {
       background: #ffebe7;
       width: 800px;
       height: 215px;
@@ -132,26 +132,28 @@ export const MainGame = styled.div`
               }
             }
           }
-        }     
+        }
       }
     }
   }
   // 하단 랜덤 셀렉트 상자
   div.subWarp {
-    width:1000px;
+    width: 1000px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     div.regionSelect {
-        margin: 0 50px;
+      margin: 5px 50px 0 50px;
       select {
         background-color: #fff2e9;
+        letter-spacing: 0.1rem;
+        color: gray;
         width: 200px;
         height: 50px;
         border: 2px solid black;
         border-radius: 5px;
         font-size: 1.2rem;
-        padding:10px;
+        padding: 10px;
         cursor: pointer;
         &:focus {
           border-color: black;
@@ -162,11 +164,14 @@ export const MainGame = styled.div`
         option {
           border-radius: 5px;
         }
-
+      }
+      div.districtChoice {
+        margin-top: 12.5px;
+        line-height: 150%;
+        color: #777;
       }
     }
     div.rollContainer {
-      //
       div.roll {
         background-color: #f9b2a6;
         width: 230px;
@@ -181,40 +186,39 @@ export const MainGame = styled.div`
         cursor: pointer;
         animation: ${blinkingText} 1.3s ease infinite;
         font-size: 1.8rem;
-        &:hover{
+        &:hover {
           background-color: #ea8573;
           transition: 0.5s;
         }
       }
     }
     div.dropDownContainer {
-      box-sizing:border-box;
-      margin : 0 50px;
+      box-sizing: border-box;
+      margin: 5px 50px 0 50px;
       background-color: #fff2e9;
-      width:200px;
-      height:50px;
+      width: 200px;
+      height: 50px;
       border: 2px solid black;
       border-radius: 5px;
-      display:flex;
-      div.inputContainer{
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      div.inputContainer {
         display: flex;
-        margin-left:10px;
+        margin-left: 10px;
         align-items: center;
         z-index: 3;
-        &:focus-within {
-          box-shadow: 0 0 0 0.5px black;
-        }
+        position: relative;
         input {
-          box-sizing:border-box;
+          box-sizing: border-box;
           background-color: transparent;
           border: none;
           outline: none;
           font-size: 1.2rem;
           width: 171px;
           letter-spacing: 1px;
-          margin:0 -20px 0 10px;
+          margin: 0 -20px 0 10px;
         }
-        
         div.deleteButton {
           cursor: pointer;
           font-size: 1.25rem;
@@ -224,14 +228,20 @@ export const MainGame = styled.div`
   }
 `;
 
+const MapChoice = styled.div`
+  position: absolute;
+  bottom: -60px;
+  color: #777;
+  width: 200px;
+  line-height: 150%;
+`;
 
 // 지역구 입력값 보여주는 li
 export const DropDownContainer = styled.ul`
   background-color: #fff2e9;
-  position:absolute;
-  top: 10px;
-  width: 210px;
-  top: 760px;
+  position: absolute;
+  top: 47.5px;
+  width: 190px;
   list-style-type: none;
   margin-top: -1px;
   padding: 0.5rem 0 0 0.25rem;
@@ -256,7 +266,6 @@ export const DropDownContainer = styled.ul`
     }
   }
 `;
-
 
 // 자동완성 CSS 끝
 
@@ -461,10 +470,13 @@ function Slots({
         <div className="regionSelect">
           <select className="select">
             <option disabled selected>
-              서울시
+              지역선택
             </option>
             <option value="seoul"> 서울시</option>
           </select>
+          <div className="districtChoice">
+            현재는 서울시에서만, <br /> 선택이 가능합니다.
+          </div>
         </div>
 
         {/* 2번 */}
@@ -484,11 +496,14 @@ function Slots({
               X
             </div>
           </div>
-          {/* <div>
-            <p>서울시 지역에서 추천이 가능합니다.</p>
-          </div> */}
 
-          {!hasText || !showDropdown ? null : (
+          {!hasText || !showDropdown ? (
+            <MapChoice>
+              지역구 미입력시,
+              <br />
+              랜덤으로 안내드립니다.
+            </MapChoice>
+          ) : (
             <DropDown
               options={options}
               handleComboBox={handleDropDownClick}

@@ -108,6 +108,7 @@ const ReviewPostWrap = styled.div`
     border: 3px solid black;
     border-radius: 15px;
     margin: 0 10px;
+    overflow: hidden;
     .reviewPostImg {
       height: 200px;
       border-bottom: 3px solid black;

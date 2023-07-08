@@ -385,7 +385,7 @@ const Main = () => {
             {/* 타이틀 */}
             <MainTitle>
               <MainTitleText> 오늘 점심 뭐 먹지? </MainTitleText>
-              <SuvTitleText> 서울시 점메추 룰렛 </SuvTitleText>
+              <SuvTitleText> 점심 메뉴 추천 룰렛 </SuvTitleText>
             </MainTitle>
 
             {/* 게임 */}
