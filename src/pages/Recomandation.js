@@ -232,10 +232,9 @@ const ImgWrap = styled.div`
 
 // 추천 정보
 const InformationWrap = styled.div`
-  margin: 0 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-wrap: wrap;
   > h1 {
     font-size: 1.8rem;
     padding-bottom: 10px;
@@ -247,20 +246,46 @@ const InformationWrap = styled.div`
     font-size: 1.2rem;
   }
   .InformationText {
+    height: 25px;
     text-align: left;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-
+    align-items: baseline;
     margin: 10px;
+    > a {
+      width: 430px;
+      line-height: 1.8rem;
+      margin-left: 1rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &:link {
+        color: black;
+      }
+      &:hover {
+        font-weight: bold;
+      }
+      &:visited {
+        color: black;
+      }
+    }
+    > span {
+      color: #777;
+      margin-left: 1rem;
+    }
+    > h4 {
+      white-space: nowrap;
+      font-weight: normal;
+    }
   }
   .address1 {
-    width: 110px;
     line-height: 1.8rem;
   }
   .address2 {
     width: 430px;
+    height: 25px;
     line-height: 1.8rem;
+    margin-left: 1rem;
   }
 `;
 
@@ -565,26 +590,21 @@ const Recomandation = () => {
                   <SliderContainer>
                     <StyledSlider {...settings}>
                       {/* 100개의 사진data중에서 정상적인 사진을 추출하기 위해 "맛집" 키워드로 필터링 */}
+                      {/*.filter((item) => item.title.includes("맛집")) 필터 적용할까말까*/}
                       {index === 0 &&
-                        image1
-                          .filter((item) => item.title.includes("맛집"))
-                          .slice(0, 5)
-                          .map((item, index) => (
-                            <div key={index}>
-                              <img src={item.thumbnail} alt="Thumbnail" />
-                            </div>
-                          ))}
+                        image1.slice(0, 5).map((item, index) => (
+                          <div key={index}>
+                            <img src={item.thumbnail} alt="Thumbnail" />
+                          </div>
+                        ))}
 
                       {/* 2번째 음식점 사진 랜더링 */}
                       {index === 1 &&
-                        image2
-                          .filter((item) => item.title.includes("맛집"))
-                          .slice(0, 5)
-                          .map((item, index) => (
-                            <div key={index}>
-                              <img src={item.thumbnail} alt="Thumbnail" />
-                            </div>
-                          ))}
+                        image2.slice(0, 5).map((item, index) => (
+                          <div key={index}>
+                            <img src={item.thumbnail} alt="Thumbnail" />
+                          </div>
+                        ))}
                     </StyledSlider>
                   </SliderContainer>
 
@@ -594,13 +614,20 @@ const Recomandation = () => {
                       {recommendation.title}{" "}
                     </h1>
                     <p className="InformationText">
-                      사이트 :
-                      <a target="_blank" href={recommendation.link}>
-                        {recommendation.link}
-                      </a>
+                      <h4>사이트 :</h4>
+                      {recommendation.link ? (
+                        <a target="_blank" href={recommendation.link}>
+                          {recommendation.link}
+                        </a>
+                      ) : (
+                        <span>
+                          {recommendation.title}은 사이트를 제공하고 있지
+                          않습니다.
+                        </span>
+                      )}
                     </p>
                     <div className="InformationText">
-                      <div className="address1">(신)주소:</div>{" "}
+                      <div className="address1">주소 :</div>{" "}
                       <div className="address2">
                         {recommendation.roadAddress}
                       </div>
@@ -609,21 +636,21 @@ const Recomandation = () => {
                   <ViewDetails onClick={openReview}>
                     <h1> 상세보기 </h1>
                   </ViewDetails>
+
+                  {/* 상세보기 띄우는 곳*/}
+                  {showReview ? (
+                    <BlogModal
+                      openReview={openReview}
+                      closeReview={closeReview}
+                      blogData1={blogData1}
+                      blogData2={blogData2}
+                      data={data}
+                    />
+                  ) : (
+                    ""
+                  )}
                 </RecomandationWrap>
               ))}
-
-              {/* 상세보기 띄우는 곳*/}
-              {showReview ? (
-                <BlogModal
-                  openReview={openReview}
-                  closeReview={closeReview}
-                  blogData1={blogData1}
-                  blogData2={blogData2}
-                  data={data}
-                />
-              ) : (
-                ""
-              )}
             </MainWrap>
             {/* 메인창 끝 */}
 
