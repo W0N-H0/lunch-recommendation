@@ -383,10 +383,10 @@ const Recomandation = () => {
     imageData2();
   }, [data]);
 
-  // 블로그 api받아오는 코드
-  const [blogData, setblogData] = useState();
+  // 첫번째 음식점 블로그 api받아오는 코드
+  const [blogData1, setblogData1] = useState();
   useEffect(() => {
-    const fetchblogData = async () => {
+    const fetchblogData1 = async () => {
       try {
         const response = await axios.get("/v1/search/blog.json", {
           params: {
@@ -398,8 +398,14 @@ const Recomandation = () => {
             "X-Naver-Client-Secret": "FBtejVg8km",
           },
         });
+        // title <br>,</br> 문자열 필터링 로직 추가
+        const responseData = response.data.items.map((item) => {
+          let str = item.title;
+          str = str.replace(/<\/?b>/g, "");
+          return { ...item, title: str };
+        });
 
-        setblogData(response.data.items);
+        setblogData1(responseData);
         console.log(response);
       } catch (error) {
         let message = "Unknown Error";
@@ -408,8 +414,43 @@ const Recomandation = () => {
       }
     };
 
-    fetchblogData();
+    fetchblogData1();
   }, [image1]);
+
+  // 두번째 음식점 블로그 api받아오는 코드
+  const [blogData2, setblogData2] = useState();
+  useEffect(() => {
+    const fetchblogData2 = async () => {
+      try {
+        const response = await axios.get("/v1/search/blog.json", {
+          params: {
+            query: `${data[1].title} 내돈내산`,
+            display: 4,
+          },
+          headers: {
+            "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
+            "X-Naver-Client-Secret": "FBtejVg8km",
+          },
+        });
+
+        // title <br>,</br> 문자열 필터링 로직 추가
+        const responseData = response.data.items.map((item) => {
+          let str = item.title;
+          str = str.replace(/<\/?b>/g, "");
+          return { ...item, title: str };
+        });
+
+        setblogData2(responseData);
+        console.log(response);
+      } catch (error) {
+        let message = "Unknown Error";
+        if (error instanceof Error) message = error.message;
+        console.log(message);
+      }
+    };
+
+    fetchblogData2();
+  }, [image2]);
 
   // 지역구 모달창
   const [showModal, setShowModal] = useState(false);
@@ -422,8 +463,10 @@ const Recomandation = () => {
     setShowModal(false);
   };
 
-  // 상세보기 모달창
+  // 상세보기 음식점1 모달창
   const [showReview, setShowReview] = useState(false);
+  // 상세보기 음식점2 모달창
+  const [showReview2, setShowReview2] = useState(false);
 
   const openReview = () => {
     setShowReview(true);
@@ -431,6 +474,10 @@ const Recomandation = () => {
 
   const closeReview = () => {
     setShowReview(false);
+  };
+
+  const openReview2 = () => {
+    setShowReview2(true);
   };
 
   const settings = {
@@ -570,7 +617,9 @@ const Recomandation = () => {
                 <BlogModal
                   openReview={openReview}
                   closeReview={closeReview}
-                  blogData={blogData}
+                  blogData1={blogData1}
+                  blogData2={blogData2}
+                  data={data}
                 />
               ) : (
                 ""

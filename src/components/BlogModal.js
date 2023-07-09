@@ -121,8 +121,9 @@ const ReviewPostWrap = styled.div`
       justify-content: space-evenly;
       background-color: white;
       > h4 {
-        font-size: 1.5rem;
+        font-size: 1.1rem;
         font-weight: bold;
+        line-height: 1.5rem;
       }
       > p {
         font-size: 1.2rem;
@@ -134,7 +135,7 @@ const ReviewPostWrap = styled.div`
   }
 `;
 
-const BlogModal = ({ closeReview, blogData }) => {
+const BlogModal = ({ closeReview, blogData1, blogData2, data }) => {
   return (
     <ModalBackground>
       <Container>
@@ -171,42 +172,19 @@ const BlogModal = ({ closeReview, blogData }) => {
         {/* 메인창 */}
         <MainWrap>
           <TitleWrap>
-            <h1> [API] 식당 이름 </h1>
-            <h1> 식당 후기 보기 </h1>
+            <h1> {data[0].title} </h1>
+            <h1> 🐷 블로그 후기 보기 🐷 </h1>
           </TitleWrap>
           <ReviewPostWrap>
-            <div>
-              <div className="reviewPostImg"></div>
-              <a
-                target="_blank"
-                href={blogData[0].link}
-                className="reviewPostText"
-              >
-                <h4>{blogData[0].title}</h4>
-                <p>{blogData[0].postdate}</p>
-              </a>
-            </div>
-            <div>
-              <div className="reviewPostImg"></div>
-              <div className="reviewPostText">
-                <h4>블로그 title</h4>
-                <p>dateTime</p>
+            {blogData1.map((data) => (
+              <div key={data.link}>
+                <div className="reviewPostImg"></div>
+                <a target="_blank" href={data.link} className="reviewPostText">
+                  <h4>{data.title}</h4>
+                  <p>작성일: {data.postdate}</p>
+                </a>
               </div>
-            </div>
-            <div>
-              <div className="reviewPostImg"></div>
-              <div className="reviewPostText">
-                <h4>블로그 title</h4>
-                <p>dateTime</p>
-              </div>
-            </div>
-            <div>
-              <div className="reviewPostImg"></div>
-              <div className="reviewPostText">
-                <h4>블로그 title</h4>
-                <p>dateTime</p>
-              </div>
-            </div>
+            ))}
           </ReviewPostWrap>
         </MainWrap>
         {/* 메인창 끝 */}
