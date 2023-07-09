@@ -135,7 +135,16 @@ const ReviewPostWrap = styled.div`
   }
 `;
 
-const BlogModal = ({ closeReview, blogData1, blogData2, data }) => {
+const BlogModal = ({
+  closeReview,
+  blogData1,
+  blogData2,
+  data,
+  openReview,
+  selectedModalIndex,
+}) => {
+  const blogData = [blogData1, blogData2];
+
   return (
     <ModalBackground>
       <Container>
@@ -172,11 +181,11 @@ const BlogModal = ({ closeReview, blogData1, blogData2, data }) => {
         {/* 메인창 */}
         <MainWrap>
           <TitleWrap>
-            <h1> {data[0].title} </h1>
+            <h1> {data[selectedModalIndex].title} </h1>
             <h1> 🐷 블로그 후기 보기 🐷 </h1>
           </TitleWrap>
           <ReviewPostWrap>
-            {blogData1.map((data) => (
+            {blogData[selectedModalIndex].map((data) => (
               <div key={data.link}>
                 <div className="reviewPostImg"></div>
                 <a target="_blank" href={data.link} className="reviewPostText">

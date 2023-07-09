@@ -306,7 +306,7 @@ const ViewDetails = styled.div`
 `;
 
 const Recomandation = () => {
-  // axios로 받은 데이터를 저장해두는 상태
+  // axios로 받은 검색 데이터를 저장해두는 상태
   const [data, setData] = useState([]);
   // 검색결과 데이터중 1번째 추천음식점 이미지를 저장해두는 useState
   const [image1, setImage1] = useState([]);
@@ -340,6 +340,7 @@ const Recomandation = () => {
         const randomItems = getRandomItems(response.data.items, 2);
 
         // 받아온 데이터의 일부 title가 <b>,</b>를 포함하기에, 해당 값을 제거하기 위한 코드
+        console.log(response);
         const modifiedItems = randomItems.map((item) => {
           let str = item.title;
           str = str.replace(/<\/?b>/g, "");
@@ -355,6 +356,7 @@ const Recomandation = () => {
 
     fetchData();
   }, []);
+
   // 이미지를 받아오는 API의 쿼리에 검색 API결과가 필요하기 때문에,
   // 검색 API가 실행된 후 실행하기 위해 data(검색api 결과)가 변동이 있을때 이미지 API실행
   useEffect(() => {
@@ -493,16 +495,20 @@ const Recomandation = () => {
   // 상세보기 음식점2 모달창
   const [showReview2, setShowReview2] = useState(false);
 
-  const openReview = () => {
-    setShowReview(true);
+  const [selectedModalIndex, setSelectedModalIndex] = useState(null);
+
+  const openReview = (index) => {
+    if (index === 0) {
+      setShowReview(true);
+    } else if (index === 1) {
+      setShowReview2(true);
+    }
+    setSelectedModalIndex(index);
   };
 
   const closeReview = () => {
     setShowReview(false);
-  };
-
-  const openReview2 = () => {
-    setShowReview2(true);
+    setShowReview2(false);
   };
 
   const settings = {
@@ -579,12 +585,11 @@ const Recomandation = () => {
             {/* 메인창 */}
             <MainWrap>
               {/* 추천 창 1 */}
-
               {data.map((recommendation, index) => (
                 <RecomandationWrap key={index}>
                   <TopWrap>
                     <h1>
-                      (추천 {index + 1}) {recommendation.category}{" "}
+                      (추천 {index + 1}) {recommendation.category}
                     </h1>
                   </TopWrap>
                   <SliderContainer>
@@ -592,19 +597,27 @@ const Recomandation = () => {
                       {/* 100개의 사진data중에서 정상적인 사진을 추출하기 위해 "맛집" 키워드로 필터링 */}
                       {/*.filter((item) => item.title.includes("맛집")) 필터 적용할까말까*/}
                       {index === 0 &&
-                        image1.slice(0, 5).map((item, index) => (
-                          <div key={index}>
-                            <img src={item.thumbnail} alt="Thumbnail" />
-                          </div>
-                        ))}
+                        image1
+                          .filter((item) => item.title.includes("맛집"))
+                          .filter((item) => !item.thumbnail.includes("output"))
+                          .slice(0, 5)
+                          .map((item, index) => (
+                            <div key={index}>
+                              <img src={item.thumbnail} alt="Thumbnail" />
+                            </div>
+                          ))}
 
                       {/* 2번째 음식점 사진 랜더링 */}
                       {index === 1 &&
-                        image2.slice(0, 5).map((item, index) => (
-                          <div key={index}>
-                            <img src={item.thumbnail} alt="Thumbnail" />
-                          </div>
-                        ))}
+                        image2
+                          .filter((item) => item.title.includes("맛집"))
+                          .filter((item) => !item.thumbnail.includes("output"))
+                          .slice(0, 5)
+                          .map((item, index) => (
+                            <div key={index}>
+                              <img src={item.thumbnail} alt="Thumbnail" />
+                            </div>
+                          ))}
                     </StyledSlider>
                   </SliderContainer>
 
@@ -633,18 +646,24 @@ const Recomandation = () => {
                       </div>
                     </div>
                   </InformationWrap>
-                  <ViewDetails onClick={openReview}>
+
+                  <ViewDetails
+                    onClick={() => {
+                      openReview(index);
+                    }}
+                  >
                     <h1> 상세보기 </h1>
                   </ViewDetails>
 
                   {/* 상세보기 띄우는 곳*/}
-                  {showReview ? (
+                  {showReview || showReview2 ? (
                     <BlogModal
                       openReview={openReview}
                       closeReview={closeReview}
                       blogData1={blogData1}
                       blogData2={blogData2}
                       data={data}
+                      selectedModalIndex={selectedModalIndex}
                     />
                   ) : (
                     ""
@@ -652,6 +671,7 @@ const Recomandation = () => {
                 </RecomandationWrap>
               ))}
             </MainWrap>
+
             {/* 메인창 끝 */}
 
             {/* 하단바 */}
