@@ -293,7 +293,7 @@ const Recomandation = () => {
   const food = searchParams.get("food");
   const inputValue = searchParams.get("inputValue");
 
-  // 검색결과 5개중 랜덤으로 2개를 뽑기 위한 작업
+  // 검색결과 5개중 랜덤으로 2개를 뽑기 위한 함수
   const getRandomItems = (array, count) => {
     const shuffled = array.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
@@ -313,8 +313,14 @@ const Recomandation = () => {
           },
         });
         const randomItems = getRandomItems(response.data.items, 2);
-        setData(randomItems);
-        console.log(response.data);
+
+        // 받아온 데이터의 일부 title가 <b>,</b>를 포함하기에, 해당 값을 제거하기 위한 코드
+        const modifiedItems = randomItems.map((item) => {
+          let str = item.title;
+          str = str.replace(/<\/?b>/g, "");
+          return { ...item, title: str };
+        });
+        setData(modifiedItems);
       } catch (error) {
         let message = "Unknown Error";
         if (error instanceof Error) message = error.message;
@@ -324,7 +330,6 @@ const Recomandation = () => {
 
     fetchData();
   }, []);
-
   // 이미지를 받아오는 API의 쿼리에 검색 API결과가 필요하기 때문에,
   // 검색 API가 실행된 후 실행하기 위해 data(검색api 결과)가 변동이 있을때 이미지 API실행
   useEffect(() => {
@@ -333,9 +338,8 @@ const Recomandation = () => {
       try {
         const response = await axios.get("/v1/search/image", {
           params: {
-            query: `${data[0].title}메뉴`,
-            display: 50,
-            sort: "sim",
+            query: `${data[0].title}${food}`,
+            display: 100,
           },
           headers: {
             "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
@@ -357,9 +361,8 @@ const Recomandation = () => {
       try {
         const response = await axios.get("/v1/search/image", {
           params: {
-            query: `${data[1].title}메뉴`,
-            display: 50,
-            sort: "sim",
+            query: `${data[1].title}${food}`,
+            display: 100,
           },
           headers: {
             "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
@@ -406,7 +409,7 @@ const Recomandation = () => {
     };
 
     fetchblogData();
-  }, [data]);
+  }, [image1]);
 
   // 지역구 모달창
   const [showModal, setShowModal] = useState(false);
@@ -514,21 +517,27 @@ const Recomandation = () => {
                   </TopWrap>
                   <SliderContainer>
                     <StyledSlider {...settings}>
-                      {/* 50개의 사진목록중 랜덤으로 5개 사진 뿌려줌 (조건부 랜더링으로) */}
+                      {/* 100개의 사진data중에서 정상적인 사진을 추출하기 위해 "맛집" 키워드로 필터링 */}
                       {index === 0 &&
-                        image1.slice(0, 5).map((item, index) => (
-                          <div key={index}>
-                            <img src={item.thumbnail} alt="Thumbnail" />
-                          </div>
-                        ))}
+                        image1
+                          .filter((item) => item.title.includes("맛집"))
+                          .slice(0, 5)
+                          .map((item, index) => (
+                            <div key={index}>
+                              <img src={item.thumbnail} alt="Thumbnail" />
+                            </div>
+                          ))}
 
                       {/* 2번째 음식점 사진 랜더링 */}
                       {index === 1 &&
-                        image2.slice(0, 5).map((item, index) => (
-                          <div key={index}>
-                            <img src={item.thumbnail} alt="Thumbnail" />
-                          </div>
-                        ))}
+                        image2
+                          .filter((item) => item.title.includes("맛집"))
+                          .slice(0, 5)
+                          .map((item, index) => (
+                            <div key={index}>
+                              <img src={item.thumbnail} alt="Thumbnail" />
+                            </div>
+                          ))}
                     </StyledSlider>
                   </SliderContainer>
 
