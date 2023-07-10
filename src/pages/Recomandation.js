@@ -303,6 +303,9 @@ const ViewDetails = styled.div`
   justify-content: center;
   margin: 20px 47px 20px 47px;
   cursor: pointer;
+  &:hover {
+    background: #CD9F79;
+  }
 `;
 
 const Recomandation = () => {
@@ -329,7 +332,7 @@ const Recomandation = () => {
       try {
         const response = await axios.get("/v1/search/local.json", {
           params: {
-            query: `${inputValue} ${food} `,
+            query: `서울 ${inputValue} ${food} `,
             display: 5,
           },
           headers: {

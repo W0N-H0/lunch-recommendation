@@ -39,14 +39,13 @@ const TopBarWrap = styled.div`
 // 메인창
 const MainWrap = styled.div`
   height: 85%;
-  background: linear-gradient(
+  background: 
+  linear-gradient(
       135deg,
       #ffdc79 0%,
       rgba(255, 255, 255, 0.39) 79.69%,
       rgba(255, 255, 255, 0) 100%
-    ),
-    #ffdf85;
-
+    ),#ffdf85;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,17 +85,18 @@ const AcctionImg = styled.img`
   width: 40px;
   height: 40px;
   display: flex;
-  .closeButton {
-    background-color: black;
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 //제목 문구
 const TitleWrap = styled.div`
   > h1 {
     font-size: 3rem;
-    margin: 30px;
+    margin: 10px;
+  }
+  > h2 {
+    font-size : 2rem;
+    margin: 20px;
   }
 `;
 
@@ -113,6 +113,9 @@ const ReviewPostWrap = styled.div`
       height: 200px;
       border-bottom: 3px solid black;
       background-color: ivory;
+      > img {
+        width:200px;
+      }
     }
     .reviewPostText {
       height: 100px;
@@ -120,16 +123,28 @@ const ReviewPostWrap = styled.div`
       flex-direction: column;
       justify-content: space-evenly;
       background-color: white;
+      text-decoration : none;
       > h4 {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: bold;
         line-height: 1.5rem;
+        padding:5px;
+        color:black;
+        height:40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-word;
+
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical
       }
       > p {
-        font-size: 1.2rem;
+        font-size: 1rem;
         color: #777;
         display: flex;
         padding: 0 10px;
+        justify-content: center;
       }
     }
   }
@@ -182,15 +197,17 @@ const BlogModal = ({
         <MainWrap>
           <TitleWrap>
             <h1> {data[selectedModalIndex].title} </h1>
-            <h1> 🐷 블로그 후기 보기 🐷 </h1>
+            <h2> 🐷 블로그 후기 보기 🐷 </h2>
           </TitleWrap>
           <ReviewPostWrap>
             {blogData[selectedModalIndex].map((data) => (
               <div key={data.link}>
-                <div className="reviewPostImg"></div>
+                <div className="reviewPostImg">
+                  <img src="/images/Get the We Heart It app!.gif" alt="" />
+                </div>
                 <a target="_blank" href={data.link} className="reviewPostText">
                   <h4>{data.title}</h4>
-                  <p>작성일: {data.postdate}</p>
+                  <p>작성일 {data.postdate.substring(0, 4)}년 {data.postdate.substring(4, 6)}월 {data.postdate.substring(6, 8)}일</p>
                 </a>
               </div>
             ))}
