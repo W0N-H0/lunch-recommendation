@@ -162,43 +162,52 @@ const TopWrap = styled.div`
   }
 `;
 
-// 가로스크롤
+// 슬라이터 Container
 const SliderContainer = styled.div`
-  margin: 10px 10px 0px 17px;
-  border-radius: 10px;
-  overflow: hidden;
+  margin: auto;
+  padding-bottom:20px;
   height: 260px;
   width: 560px;
 `;
-
+// 슬라이더 Wrap
 const StyledSlider = styled(Slider)`
   height: 300px;
-  width: 100%;
-  position: relative;
-
+  padding:15px;
   .slick-slide div {
     //슬라이더  컨텐츠
     cursor: pointer;
   }
-
   .slick-list {
-    background-color: #ffe9da;
-  }
-
+    border-radius: 10px;
+    padding: 0 10px;
+    }
+  // 슬라이더 이미지
   .slick-slide img {
-    width: 258px;
-    height: 230px;
+    width: 240px;
+    height: 240px;
+    margin:0px;
     border-radius: 10px;
     border: 3px solid black;
-    // 이미지 시작점 설정을 위한 마진
-    margin-left: 130px;
   }
-
+  // 하단 순서 버튼
   .slick-dots {
-    bottom: 40px;
+    bottom: 15px;
     margin: 0px;
   }
 `;
+
+const settings = {
+  dots: true,  // 하단 동그라미 버튼
+  arrows: false,  // 양 옆 화살표 버튼
+  infinite: true,  // 무한 반복
+  speed: 600,  // 넘어갈 때 속도
+  slidesToShow: 2,  // 한 번에 볼 수 있는 슬라이드 개수
+  slidesToScroll: 1,  // 한 번에 넘어가는 슬라이드 수
+  autoplay: true,  // 자동 슬라이드
+  centerMode: false, // 가운데 맞춤 모드
+  cssEase: 'ease'
+};
+
 
 const ImageContainer = styled.div`
   margin: 0px 50px 0px 50px;
@@ -513,19 +522,6 @@ const Recomandation = () => {
     setShowReview2(false);
   };
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 600,
-    slidesToShow: 1.6,
-    slidesToScroll: 1,
-    arrows: false,
-    centerMode: true,
-    cssEase: "linear",
-    autoplay: true,
-    pauseOnHover: true,
-  };
-
   return (
     <>
       {/* 데이터 불러오기전 분기*/}
@@ -596,10 +592,8 @@ const Recomandation = () => {
                   </TopWrap>
                   <SliderContainer>
                     <StyledSlider {...settings}>
-                      {/* 100개의 사진data중에서 정상적인 사진을 추출하기 위해 "맛집" 키워드로 필터링 */}
-                      {/*.filter((item) => item.title.includes("맛집")) 필터 적용할까말까*/}
                       {index === 0 &&
-                        image1
+                        (image1
                           .filter((item) => item.title.includes("맛집"))
                           .filter((item) => !item.thumbnail.includes("output"))
                           .filter((item) => !item.thumbnail.includes("cyworld"))
@@ -608,7 +602,7 @@ const Recomandation = () => {
                             <div key={index}>
                               <img src={item.thumbnail} alt="Thumbnail" />
                             </div>
-                          ))}
+                          )))}
 
                       {/* 2번째 음식점 사진 랜더링 */}
                       {index === 1 &&
