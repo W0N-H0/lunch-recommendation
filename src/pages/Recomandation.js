@@ -167,23 +167,26 @@ const SliderContainer = styled.div`
   margin: auto;
   padding-bottom:20px;
   height: 260px;
-  width: 560px;
 `;
 // 슬라이더 Wrap
 const StyledSlider = styled(Slider)`
   height: 300px;
-  padding:15px;
+  padding:10px 5px;
+  margin-left:20px;
   .slick-slide div {
     //슬라이더  컨텐츠
     cursor: pointer;
   }
+  .slick-slide div:focus-visible{
+    outline:none;
+  }
   .slick-list {
     border-radius: 10px;
-    padding: 0 10px;
+    padding: 0;
     }
   // 슬라이더 이미지
   .slick-slide img {
-    width: 240px;
+    width: 260px;
     height: 240px;
     margin:0px;
     border-radius: 10px;
@@ -203,9 +206,10 @@ const settings = {
   speed: 600,  // 넘어갈 때 속도
   slidesToShow: 2,  // 한 번에 볼 수 있는 슬라이드 개수
   slidesToScroll: 1,  // 한 번에 넘어가는 슬라이드 수
-  autoplay: true,  // 자동 슬라이드
+  autoplay: false,  // 자동 슬라이드
   centerMode: false, // 가운데 맞춤 모드
   cssEase: 'ease'
+
 };
 
 
@@ -241,9 +245,10 @@ const ImgWrap = styled.div`
 
 // 추천 정보
 const InformationWrap = styled.div`
-  margin: 10px 10px 10px 10px;
+  margin: 10px;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   > h1 {
     font-size: 1.8rem;
     padding-bottom: 10px;
