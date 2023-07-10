@@ -243,6 +243,8 @@ const ImgWrap = styled.div`
   }
 `;
 
+
+
 // 추천 정보
 const InformationWrap = styled.div`
   margin: 10px;
@@ -602,25 +604,53 @@ const Recomandation = () => {
                           .filter((item) => item.title.includes("맛집"))
                           .filter((item) => !item.thumbnail.includes("output"))
                           .filter((item) => !item.thumbnail.includes("cyworld"))
-                          .slice(0, 5)
-                          .map((item, index) => (
-                            <div key={index}>
-                              <img src={item.thumbnail} alt="Thumbnail" />
-                            </div>
-                          )))}
+                          .slice(0, 5).length > 1 ? (
+                          image1
+                            .filter((item) => item.title.includes("맛집"))
+                            .filter(
+                              (item) => !item.thumbnail.includes("output")
+                            )
+                            .filter(
+                              (item) => !item.thumbnail.includes("cyworld")
+                            )
+                            .slice(0, 5)
+                            .map((item, index) => (
+                              <div key={index}>
+                                <img src={item.thumbnail} alt="Thumbnail" />
+                              </div>
+                            ))
+                        ) : (
+                          <div>
+                            <img src="/images/Noodles Eating GIF - Find & Share on GIPHY.gif" alt="" />
+                          </div>
+                        ))}
 
                       {/* 2번째 음식점 사진 랜더링 */}
                       {index === 1 &&
-                        image2
+                        (image2
                           .filter((item) => item.title.includes("맛집"))
                           .filter((item) => !item.thumbnail.includes("output"))
                           .filter((item) => !item.thumbnail.includes("cyworld"))
-                          .slice(0, 5)
-                          .map((item, index) => (
-                            <div key={index}>
-                              <img src={item.thumbnail} alt="Thumbnail" />
-                            </div>
-                          ))}
+                          .slice(0, 5).length > 1 ? (
+                          image2
+                            .filter((item) => item.title.includes("맛집"))
+                            .filter(
+                              (item) => !item.thumbnail.includes("output")
+                            )
+                            .filter(
+                              (item) => !item.thumbnail.includes("cyworld")
+                            )
+                            .slice(0, 5)
+                            .map((item, index) => (
+                              <div key={index}>
+                                <img src={item.thumbnail} alt="Thumbnail" />
+                              </div>
+                            ))
+                        ) : (
+                          <div>
+                            <img src="/images/Noodles Eating GIF - Find & Share on GIPHY.gif" alt="" />
+                          </div>
+                        ))}
                     </StyledSlider>
                   </SliderContainer>
 
