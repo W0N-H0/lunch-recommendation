@@ -255,8 +255,7 @@ const InformationWrap = styled.div`
     margin: 10px;
     > a {
       width: 430px;
-      line-height: 1.8rem;
-      margin-left: 1rem;
+      padding-left: 1rem;
       overflow: hidden;
       text-overflow: ellipsis;
       &:link {
@@ -603,6 +602,7 @@ const Recomandation = () => {
                         image1
                           .filter((item) => item.title.includes("맛집"))
                           .filter((item) => !item.thumbnail.includes("output"))
+                          .filter((item) => !item.thumbnail.includes("cyworld"))
                           .slice(0, 5)
                           .map((item, index) => (
                             <div key={index}>
@@ -615,6 +615,7 @@ const Recomandation = () => {
                         image2
                           .filter((item) => item.title.includes("맛집"))
                           .filter((item) => !item.thumbnail.includes("output"))
+                          .filter((item) => !item.thumbnail.includes("cyworld"))
                           .slice(0, 5)
                           .map((item, index) => (
                             <div key={index}>
