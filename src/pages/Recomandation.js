@@ -183,7 +183,14 @@ const StyledSlider = styled(Slider)`
   .slick-list {
     border-radius: 10px;
     padding: 0;
+    > div {
+      display:flex;
+      margin:0;
+    > div {
+      margin-right:20px;
     }
+    }
+  }
   // 슬라이더 이미지
   .slick-slide img {
     width: 260px;
@@ -322,6 +329,12 @@ const ViewDetails = styled.div`
     background: #CD9F79;
   }
 `;
+
+const NoImgMsg = styled.img`
+  width: 200px;
+  height: 200px;
+`
+
 
 const Recomandation = () => {
   // axios로 받은 검색 데이터를 저장해두는 상태
@@ -621,7 +634,7 @@ const Recomandation = () => {
                             ))
                         ) : (
                           <div>
-                            <img src="/images/Noodles Eating GIF - Find & Share on GIPHY.gif" alt="" />
+                            <NoImgMsg src="/images/Noodles Eating GIF - Find & Share on GIPHY.gif" alt="" />
                           </div>
                         ))}
 
@@ -648,7 +661,7 @@ const Recomandation = () => {
                             ))
                         ) : (
                           <div>
-                            <img src="/images/Noodles Eating GIF - Find & Share on GIPHY.gif" alt="" />
+                            <NoImgMsg src="/images/Noodles Eating GIF - Find & Share on GIPHY.gif" alt="" />
                           </div>
                         ))}
                     </StyledSlider>
