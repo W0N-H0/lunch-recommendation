@@ -1,8 +1,6 @@
-import styled from "styled-components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
 import Recomandation from "./pages/Recomandation";
-import "./App.css";
 import React, { useRef, useState, useEffect } from "react";
 
 function App() {
