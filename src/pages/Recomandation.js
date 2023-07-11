@@ -1,9 +1,7 @@
 import axios from "axios";
 import styled from "styled-components";
-import Slots from "../components/Slots";
-import Menu from "../components/Menu";
 import MapModalSec from "../components/MapModalSec";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import BlogModal from "../components/BlogModal";
 import { useLocation } from "react-router-dom"; // useNavigate로 전달한 쿼리파라미터값(uri)을 사용하기 위한 훅
 import "slick-carousel/slick/slick.css"; // 가로스크롤 캐러셀 구현을 위한 css
@@ -165,37 +163,37 @@ const TopWrap = styled.div`
 // 슬라이터 Container
 const SliderContainer = styled.div`
   margin: auto;
-  padding-bottom:20px;
+  padding-bottom: 20px;
   height: 260px;
 `;
 // 슬라이더 Wrap
 const StyledSlider = styled(Slider)`
   height: 300px;
-  padding:10px 5px;
-  margin-left:20px;
+  padding: 10px 5px;
+  margin-left: 20px;
   .slick-slide div {
     //슬라이더  컨텐츠
     cursor: pointer;
   }
-  .slick-slide div:focus-visible{
-    outline:none;
+  .slick-slide div:focus-visible {
+    outline: none;
   }
   .slick-list {
     border-radius: 10px;
     padding: 0;
     > div {
-      display:flex;
-      margin:0;
-    > div {
-      margin-right:20px;
-    }
+      display: flex;
+      margin: 0;
+      > div {
+        margin-right: 20px;
+      }
     }
   }
   // 슬라이더 이미지
   .slick-slide img {
     width: 260px;
     height: 240px;
-    margin:0px;
+    margin: 0px;
     border-radius: 10px;
     border: 3px solid black;
   }
@@ -207,18 +205,16 @@ const StyledSlider = styled(Slider)`
 `;
 
 const settings = {
-  dots: true,  // 하단 동그라미 버튼
-  arrows: false,  // 양 옆 화살표 버튼
-  infinite: true,  // 무한 반복
-  speed: 600,  // 넘어갈 때 속도
-  slidesToShow: 2,  // 한 번에 볼 수 있는 슬라이드 개수
-  slidesToScroll: 1,  // 한 번에 넘어가는 슬라이드 수
-  autoplay: false,  // 자동 슬라이드
+  dots: true, // 하단 동그라미 버튼
+  arrows: false, // 양 옆 화살표 버튼
+  infinite: true, // 무한 반복
+  speed: 600, // 넘어갈 때 속도
+  slidesToShow: 2, // 한 번에 볼 수 있는 슬라이드 개수
+  slidesToScroll: 1, // 한 번에 넘어가는 슬라이드 수
+  autoplay: false, // 자동 슬라이드
   centerMode: false, // 가운데 맞춤 모드
-  cssEase: 'ease'
-
+  cssEase: "ease",
 };
-
 
 const ImageContainer = styled.div`
   margin: 0px 50px 0px 50px;
@@ -249,8 +245,6 @@ const ImgWrap = styled.div`
     }
   }
 `;
-
-
 
 // 추천 정보
 const InformationWrap = styled.div`
@@ -326,15 +320,14 @@ const ViewDetails = styled.div`
   margin: 20px 47px 20px 47px;
   cursor: pointer;
   &:hover {
-    background: #CD9F79;
+    background: #cd9f79;
   }
 `;
 
 const NoImgMsg = styled.img`
   width: 200px;
   height: 200px;
-`
-
+`;
 
 const Recomandation = () => {
   // axios로 받은 검색 데이터를 저장해두는 상태
@@ -634,7 +627,10 @@ const Recomandation = () => {
                             ))
                         ) : (
                           <div>
-                            <NoImgMsg src="/images/Noodles Eating GIF - Find & Share on GIPHY.gif" alt="" />
+                            <NoImgMsg
+                              src="/images/Noodles Eating GIF - Find & Share on GIPHY.gif"
+                              alt=""
+                            />
                           </div>
                         ))}
 
@@ -661,7 +657,10 @@ const Recomandation = () => {
                             ))
                         ) : (
                           <div>
-                            <NoImgMsg src="/images/Noodles Eating GIF - Find & Share on GIPHY.gif" alt="" />
+                            <NoImgMsg
+                              src="/images/Noodles Eating GIF - Find & Share on GIPHY.gif"
+                              alt=""
+                            />
                           </div>
                         ))}
                     </StyledSlider>
@@ -730,7 +729,6 @@ const Recomandation = () => {
           </Container>
           {/* <BlogModal /> */}
 
-          <Menu />
         </BackgroundImage>
       ) : (
         <div>데이터를 불러오는 중입니다..</div>

@@ -18,7 +18,6 @@ import schoolFood2 from "../img/schoolFood2.png";
 import schoolFood3 from "../img/schoolFood3.png";
 import styled, { keyframes } from "styled-components";
 
-//~91줄까지 자동완성을 위한 CSS
 const boxShadow = "0 4px 6px rgb(32 33 36 / 28%)";
 
 const blinkingText = keyframes`
@@ -176,16 +175,24 @@ export const MainGame = styled.div`
         background-color: #f9b2a6;
         width: 230px;
         height: 80px;
-        border: 2px solid black;
         border-radius: 5px;
         padding: 10px;
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        cursor: pointer;
         animation: ${blinkingText} 1.3s ease infinite;
         font-size: 1.8rem;
+        cursor: pointer;
+        border: solid 1px gray;
+
+        &:active {
+          box-shadow: inset -5px -5px 5px rgba(225, 225, 225, 0.5),
+            inset 8px 0px 16px rgba(0, 0, 0, 0.1);
+        }
+
         &:hover {
           background-color: #ea8573;
           transition: 0.5s;
@@ -270,9 +277,6 @@ export const DropDownContainer = styled.ul`
 // 자동완성 CSS 끝
 
 function Slots({
-  food1,
-  food2,
-  food3,
   setFood1,
   setFood2,
   setFood3,
@@ -298,15 +302,6 @@ function Slots({
     [koreanFood2, chineseFood2, westernFood2, japaneseFood2, schoolFood2],
     [koreanFood3, chineseFood3, westernFood3, japaneseFood3, schoolFood3],
   ];
-
-  //  useEffect(() => {
-  //   if (!rolling) {
-  //     const slot1Top = slotRefs[0].current.style.top;
-  //     slotRefs.slice(1).forEach((slotRef) => {
-  //       slotRef.current.style.top = slot1Top;
-  //     });
-  //   }
-  // }, [rolling]);
 
   useEffect(() => {
     if (!rolling) {
@@ -373,21 +368,16 @@ function Slots({
     }
   }, [inputValue]);
 
-  // TODO : input과 dropdown 상태 관리를 위한 handler가 있어야 합니다.
   const handleInputChange = (event) => {
     /**
      * handleInputChange 함수는
-     * - input값 변경 시 발생되는 change 이벤트 핸들러입니다.
-     * - input값과 상태를 연결시킬 수 있게 controlled component로 만들 수 있고
-     * - autocomplete 추천 항목이 dropdown으로 시시각각 변화되어 보여질 수 있도록 상태를 변경합니다.
-     *
-     * handleInputChange 함수를 완성하여 아래 3가지 기능을 구현합니다.
+     * - input값 변경 시 발생되는 change 핸들러함수
+     * - autocomplete 추천 항목이 dropdown으로 시시각각 변화되어 보여질 수 있도록 상태를 변경
      *
      * onChange 이벤트 발생 시
-     * 1. input값 상태인 inputValue가 적절하게 변경되어야 합니다.
-     * 2. input값 유무 상태인 hasText가 적절하게 변경되어야 합니다.
-     * 3. autocomplete 추천 항목인 options의 상태가 적절하게 변경되어야 합니다.
-     * Tip : options의 상태에 따라 dropdown으로 보여지는 항목이 달라집니다.
+     * 1. input값 상태인 inputValue가 적절하게 변경
+     * 2. input값 유무 상태인 hasText가 적절하게 변경
+     * 3. autocomplete 추천 항목인 options의 상태가 적절하게 변경
      */
     setInputValue(event.target.value);
     setHasText(true);
@@ -402,14 +392,12 @@ function Slots({
   const handleDropDownClick = (clickedOption) => {
     /**
      * handleDropDownClick 함수는
-     * - autocomplete 추천 항목을 클릭할 때 발생되는 click 이벤트 핸들러입니다.
-     * - dropdown에 제시된 항목을 눌렀을 때, input값이 해당 항목의 값으로 변경되는 기능을 수행합니다.
-     *
-     * handleInputChange 함수를 완성하여 아래 기능을 구현합니다.
+     * - autocomplete 추천 항목을 클릭할 때 발생되는 click 핸들러 함수
+     * - dropdown에 제시된 항목을 눌렀을 때, input값이 해당 항목의 값으로 변경되는 기능을 수행
      *
      * onClick 이벤트 발생 시
-     * 1. input값 상태인 inputValue가 적절하게 변경되어야 합니다.
-     * 2. autocomplete 추천 항목인 options의 상태가 적절하게 변경되어야 합니다.
+     * 1. input값 상태인 inputValue가 적절하게 변경
+     * 2. autocomplete 추천 항목인 options의 상태가 적절하게 변경.
      */
     setInputValue(clickedOption);
     setOptions([clickedOption]);
@@ -419,21 +407,17 @@ function Slots({
   const handleDeleteButtonClick = () => {
     /**
      * handleDeleteButtonClick 함수는
-     * - input의 오른쪽에 있는 X버튼 클릭 시 발생되는 click 이벤트 핸들러입니다.
-     * - 함수 작성을 완료하여 input값을 한 번에 삭제하는 기능을 구현합니다.
-     *
-     * handleDeleteButtonClick 함수를 완성하여 아래 기능을 구현합니다.
+     * - input의 오른쪽에 있는 X버튼 클릭 시 발생되는 click 핸들러 함수
+     * - 함수 작성을 완료하여 input값을 한 번에 삭제하는 기능을 구현
      *
      * onClick 이벤트 발생 시
-     * 1. input값 상태인 inputValue가 빈 문자열이 되어야 합니다.
+     * 1. input값 상태인 inputValue가 빈 문자열로 상태변경
      */
     setInputValue("");
     setShowDropdown(false);
     setSelectedOption(null); // 삭제 버튼 클릭 시 선택된 옵션 초기화
   };
 
-  // Advanced Challenge: 상하 화살표 키 입력 시 dropdown 항목을 선택하고, Enter 키 입력 시 input값을 선택된 dropdown 항목의 값으로 변경하는 handleKeyUp 함수를 만들고,
-  // 적절한 컴포넌트에 onKeyUp 핸들러를 할당합니다. state가 추가로 필요한지 고민하고, 필요 시 state를 추가하여 제작하세요.
   const handleKeyUp = (event) => {
     if (event.key === "ArrowUp" || event.key === "ArrowDown") {
       // 상하 화살표 키 입력 시 dropdown 항목 선택
