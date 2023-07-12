@@ -1,4 +1,40 @@
 
+<br>
+
+## Project. 메뉴 추천 룰렛
+>**[코드스테이츠 FE 45기] 스터디_참숯가마** <br>
+>**개발기간 : 2023.6.23 ~ 2023.07.15**
+
+<br>
+
+## 프로젝트 미리보기
+<center>
+<img width="300px" height="150px" src = "src/img/Main.png">
+<img width="300px" height="150px" src = "src/img/MainModal.png">
+<img width="300px" height="150px" src = "src/img/MapModalFirst.png">
+</center>
+
+<br>
+
+<center>
+<img width="300px" height="150px" src = "src/img/Recomandation.png">
+<img width="300px" height="150px" src = "src/img/BlogModal.png">
+<img width="300px" height="150px" src = "src/img/MapModalSec.png">
+</center>
+
+<br>
+
+
+## 프로젝트 팀 소개
+|이 원호|윤 예빈|
+|---|---|
+|||
+
+
+
+
+
+
 # Project. 식사
 
 <br>
