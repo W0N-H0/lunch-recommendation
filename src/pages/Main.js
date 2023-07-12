@@ -332,8 +332,8 @@ const Main = () => {
           {/* 메인창 */}
           <div className="mainWrap">
             <div className="mainTitle">
-              <div className="mainTitleText"> 오늘 점심 뭐 먹지? </div>
-              <div className="suvTitleText"> 점심 메뉴 추천 룰렛 </div>
+              <div className="mainTitleText"> 오늘 뭐 먹지? </div>
+              <div className="suvTitleText"> 메뉴 추천 룰렛 </div>
             </div>
 
             {/* 게임 */}
