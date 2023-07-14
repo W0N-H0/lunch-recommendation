@@ -18,9 +18,11 @@
 ## 프로젝트 소개
 
 **원하시는 지역을 바탕으로 메뉴 추천을 해주는 랜덤 룰렛.**
+
 <br>
 
 "뭐 먹지?" 선택이 어렵다면 추천 드립니다.
+
 <br>
 
 게임처럼 재밌게 메뉴를 골라드립니다!
@@ -40,7 +42,6 @@
 |<center>추천 페이지</center>|<center>상세보기 모달</center>|<center>지역 보기 ver 2.</center>|
 |<img width="300px" height="150px" src = "src/img/Recomandation.png">|<img width="300px" height="150px" src = "src/img/BlogModal.png">|<img width="300px" height="150px" src = "src/img/MapModalSec.png">|
 
-
 <br>
 
 ## 주요 기능
@@ -54,7 +55,7 @@
 - 추후 서울 외 지역도 추가 및 구현 예정
 
 ### 🍚 추천 받은 지역에 대한 식당 관련 정보 보기
-- 추첨 결과를 보러 가면, 관련 식당 2곳에 사이트와 주소, 관련 사진 제공
+- 추첨 결과를 보러 가면, 관련 식당 5곳 중에 랜덤으로 2곳에 사이트, 주소, 관련 사진 제공
 - 사진은 최대 5개를 보여줄 수 있으며, 없을 경우 대체 gif 제공
 
 ### 🍚 추천 받은 하단 "상세보기" 버튼 클릭시 블로그 후기 제공
@@ -75,32 +76,20 @@
 
 ## **Stack**
 
-
-
 ### **Environment**
-<img src="https://img.shields.io/badge/visual studio code-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
-<img src="https://img.shields.io/badge/git-F05032?style=flat&logo=git&logoColor=white"/>
-<img src="https://img.shields.io/badge/git hub-181717?style=flat&logo=github&logoColor=white"/>
+<img src="https://img.shields.io/badge/visual studio code-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/> <img src="https://img.shields.io/badge/git-F05032?style=flat&logo=git&logoColor=white"/> <img src="https://img.shields.io/badge/git hub-181717?style=flat&logo=github&logoColor=white"/>
 
-### **Confing**
-<img src="https://img.shields.io/badge/npm-CB3837?style=flat&logo=npm&logoColor=white"/>
-<img src="https://img.shields.io/badge/naver-03C75A?style=flat&logo=npm&logoColor=white"/>
+### **Config**
+<img src="https://img.shields.io/badge/npm-CB3837?style=flat&logo=npm&logoColor=white"/> <img src="https://img.shields.io/badge/naver-03C75A?style=flat&logo=npm&logoColor=white"/>
 
 ### **Divelopment**
-
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white"/>
-<img src="https://img.shields.io/badge/react-61DAFB?style=flat&logo=react&logoColor=white"/>
-<img src="https://img.shields.io/badge/styled components-DB7093?style=flat&logo=styledcomponents&logoColor=white"/>
-<img src="https://img.shields.io/badge/react router-CA4245?style=flat&logo=reactrouter&logoColor=white"/>
-<img src="https://img.shields.io/badge/axios-5A29E4?style=flat&logo=axios&logoColor=white"/>
-
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white"/> <img src="https://img.shields.io/badge/react-61DAFB?style=flat&logo=react&logoColor=white"/> <img src="https://img.shields.io/badge/styled components-DB7093?style=flat&logo=styledcomponents&logoColor=white"/> <img src="https://img.shields.io/badge/react router-CA4245?style=flat&logo=reactrouter&logoColor=white"/> <img src="https://img.shields.io/badge/axios-5A29E4?style=flat&logo=axios&logoColor=white"/>
 
 <br>
 
 ## 아키텍쳐
-
 ### 디렉토리 구조
-
+<img width="500px" src = "src/img/components.png">
 <br>
 
 
