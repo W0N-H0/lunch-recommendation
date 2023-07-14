@@ -305,7 +305,11 @@ function Slots({
 
   useEffect(() => {
     if (!rolling) {
+      // 슬롯이 다 돌아갔을때, result 상태를 true로 바꾸는 함수
       onSlotFinish();
+      // 밑의 코드는 slot이 다돌았을때 슬롯 2,3의 값을 슬롯1의 값으로 동기화 시키는 코드임
+      // 슬롯 도는 상태가 바뀌거나, 슬롯 종료 여부가 변경될때마다 아래의 코드가 실행됨
+      // 아래 roll 함수에도 슬롯1의 상태에 슬롯2,3을 맞추는 로직이 있으나, 그것만으로는 구현이 안되서 추가한 코드임
       const slot1Top = slotRefs[0].current.style.top;
       const slot3Top = `calc(${slot1Top} - 5px)`;
       slotRefs[2].current.style.top = slot3Top;
@@ -315,14 +319,18 @@ function Slots({
     }
   }, [rolling, onSlotFinish]);
 
+  // 룰렛 클릭했을때 실행되는 함수
   const roll = () => {
-    const totalRotations = 10;
-    setRolling(true);
+    const totalRotations = 10; // 롤링횟수
+    setRolling(true); // rolling 상태를 true로 바꿔줌
 
     const rotationInterval = setInterval(() => {
+      // 슬롯 1,2,3 을돌며 triggerSlotRotation(실제 슬롯1,2,3가 움직이게 하는 함수 리턴값은 각 슬롯 배열안의 음식물임)
       slotRefs.forEach((slotRef, i) => {
         const selected = triggerSlotRotation(slotRef, i, foods);
         if (i === 0) {
+          // 첫번째 슬롯의 음식 인덱스를 저장해두고
+          // 두번째, 세번째 슬롯의 인덱스를 첫번째 슬롯인덱스와 일치시켜 같은 음식이 나오도로감
           const foodIndex = foods[0].indexOf(selected);
           setFood1(selected);
           setFood2(foods[1][foodIndex]);
@@ -343,6 +351,7 @@ function Slots({
     }, totalRotations * 400);
   };
 
+  // 실제 각 슬롯이 돌아가게 만들어주는 함수
   const triggerSlotRotation = (slotRef, slotIndex, foods) => {
     function setTop(top) {
       slotRef.current.style.top = `${top}px`;

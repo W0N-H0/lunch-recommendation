@@ -228,10 +228,8 @@ const Main = () => {
   };
 
   const handleSlotFinish = () => {
-    // 슬롯이 다 돌아갔을때, food1과 result 상태를 불러올수 있는 함수
+    // 슬롯이 다 돌아갔을때, result 상태를 true로 바꾸는 함수
     setResult(true);
-    // console.log("Food1:", food1);
-    console.log("Result:", result);
   };
 
   // 지역구 모달창
