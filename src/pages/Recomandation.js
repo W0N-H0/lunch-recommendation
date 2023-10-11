@@ -351,20 +351,17 @@ const Recomandation = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/v1/search/local.json", {
+        const response = await axios.get("http://localhost:3001/naver/search", {
           params: {
-            query: `서울 ${inputValue} ${food} `,
-            display: 5,
-          },
-          headers: {
-            "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
-            "X-Naver-Client-Secret": "FBtejVg8km",
+            query: `${inputValue} ${food} `,
           },
         });
+        console.log(response);
         const randomItems = getRandomItems(response.data.items, 2);
 
         // 받아온 데이터의 일부 title가 <b>,</b>를 포함하기에, 해당 값을 제거하기 위한 코드
-        console.log(response);
+
+        console.log("성공");
         const modifiedItems = randomItems.map((item) => {
           let str = item.title;
           str = str.replace(/<\/?b>/g, "");
@@ -385,18 +382,17 @@ const Recomandation = () => {
   // 검색 API가 실행된 후 실행하기 위해 data(검색api 결과)가 변동이 있을때 이미지 API실행
   useEffect(() => {
     // 첫번째(data[0] 검색결과 이미지를 받아오는 API
+    console.log(data);
     const imageData1 = async () => {
       try {
-        const response = await axios.get("/v1/search/image", {
-          params: {
-            query: `${data[0].title}${food}`,
-            display: 100,
-          },
-          headers: {
-            "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
-            "X-Naver-Client-Secret": "FBtejVg8km",
-          },
-        });
+        const response = await axios.get(
+          "http://localhost:3001/naver/imagesearch",
+          {
+            params: {
+              query: `${data[0].title}${food}`,
+            },
+          }
+        );
         console.log(response);
 
         setImage1(response.data.items);
@@ -410,16 +406,14 @@ const Recomandation = () => {
     // 두번째(data[1] 검색결과 이미지를 받아오는 API
     const imageData2 = async () => {
       try {
-        const response = await axios.get("/v1/search/image", {
-          params: {
-            query: `${data[1].title}${food}`,
-            display: 100,
-          },
-          headers: {
-            "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
-            "X-Naver-Client-Secret": "FBtejVg8km",
-          },
-        });
+        const response = await axios.get(
+          "http://localhost:3001/naver/imagesearch",
+          {
+            params: {
+              query: `${data[1].title}${food}`,
+            },
+          }
+        );
         console.log(response);
 
         setImage2(response.data.items);
@@ -439,16 +433,14 @@ const Recomandation = () => {
   useEffect(() => {
     const fetchblogData1 = async () => {
       try {
-        const response = await axios.get("/v1/search/blog.json", {
-          params: {
-            query: `${data[0].title} 내돈내산`,
-            display: 4,
-          },
-          headers: {
-            "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
-            "X-Naver-Client-Secret": "FBtejVg8km",
-          },
-        });
+        const response = await axios.get(
+          "http://localhost:3001/naver/blogsearch",
+          {
+            params: {
+              query: `${data[0].title} 내돈내산`,
+            },
+          }
+        );
         // title <br>,</br> 문자열 필터링 로직 추가
         const responseData = response.data.items.map((item) => {
           let str = item.title;
@@ -473,16 +465,14 @@ const Recomandation = () => {
   useEffect(() => {
     const fetchblogData2 = async () => {
       try {
-        const response = await axios.get("/v1/search/blog.json", {
-          params: {
-            query: `${data[1].title} 내돈내산`,
-            display: 4,
-          },
-          headers: {
-            "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
-            "X-Naver-Client-Secret": "FBtejVg8km",
-          },
-        });
+        const response = await axios.get(
+          "http://localhost:3001/naver/blogsearch",
+          {
+            params: {
+              query: `${data[1].title} 내돈내산`,
+            },
+          }
+        );
 
         // title <br>,</br> 문자열 필터링 로직 추가
         const responseData = response.data.items.map((item) => {
@@ -728,7 +718,6 @@ const Recomandation = () => {
             </FooterBarWrap>
           </Container>
           {/* <BlogModal /> */}
-
         </BackgroundImage>
       ) : (
         <div>데이터를 불러오는 중입니다..</div>
