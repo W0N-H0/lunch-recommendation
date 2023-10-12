@@ -41,6 +41,7 @@ const SecondBarWrap = styled(TopBarWrap)`
   height: 5%;
   background: white;
   border-bottom: 0px;
+  margin-bottom: -1px;
 `;
 
 // 메인창
@@ -134,7 +135,7 @@ const MapModalSec = ({ closeModal }) => {
 
         {/* 메인창 */}
         <MainWrap>
-          <MapImg src="/images/map-img.png" alt="서울시 25개 지구" />
+          <MapImg src="/images/map-img.jpg" alt="서울시 25개 지구" />
         </MainWrap>
 
         {/* 하단바 */}
