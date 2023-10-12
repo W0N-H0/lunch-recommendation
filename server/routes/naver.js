@@ -1,16 +1,15 @@
 var express = require("express");
 var Axios = require("axios");
-const { resource } = require("../app");
 var router = express.Router();
+require("dotenv").config();
 
 // 네이버 검색 api
 router.get("/search", async function (req, res) {
   let query = req.query.query;
-
   let reqOptions = {
     headers: {
-      "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
-      "X-Naver-Client-Secret": "FBtejVg8km",
+      "X-Naver-Client-Id": process.env.X_NAVER_CLIENT_ID,
+      "X-Naver-Client-Secret": process.env.X_NAVER_CLIENT_SECRET,
     },
     params: {
       query: `서울 ${query}`,
@@ -41,8 +40,8 @@ router.get("/imagesearch", async function (req, res) {
   console.log(query);
   let reqOptions = {
     headers: {
-      "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
-      "X-Naver-Client-Secret": "FBtejVg8km",
+      "X-Naver-Client-Id": process.env.X_NAVER_CLIENT_ID,
+      "X-Naver-Client-Secret": process.env.X_NAVER_CLIENT_SECRET,
     },
     params: {
       query: query,
@@ -74,8 +73,8 @@ router.get("/blogsearch", async function (req, res) {
   console.log(query);
   let reqOptions = {
     headers: {
-      "X-Naver-Client-Id": "2epbJX2GaPPxglloNsL_",
-      "X-Naver-Client-Secret": "FBtejVg8km",
+      "X-Naver-Client-Id": process.env.X_NAVER_CLIENT_ID,
+      "X-Naver-Client-Secret": process.env.X_NAVER_CLIENT_SECRET,
     },
     params: {
       query: query,
