@@ -6,7 +6,7 @@ const ModalBackground = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.7);
   z-index: 999;
 `;
 
@@ -16,6 +16,7 @@ const Container = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 5px;
+  border: 3px solid black;
   border-bottom: 0px;
   width: 1100px;
   height: 720px;
