@@ -154,7 +154,7 @@ const MainModal = ({ inputValue, food1, result, handleClick }) => {
 
   const goToRecomandation = () => {
     navigate(
-      `/Recomandation?inputValue=${encodeURIComponent(
+      `/recomandation?inputValue=${encodeURIComponent(
         inputValue
       )}&food=${encodeURIComponent(food)}`
     );
