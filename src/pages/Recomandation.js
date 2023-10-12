@@ -351,11 +351,14 @@ const Recomandation = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/naver/search", {
-          params: {
-            query: `${inputValue} ${food} `,
-          },
-        });
+        const response = await axios.get(
+          "https://port-0-lunch-recomandation-euegqv2blnmkyp8j.sel5.cloudtype.app/naver/search",
+          {
+            params: {
+              query: `${inputValue} ${food} `,
+            },
+          }
+        );
         console.log(response);
         const randomItems = getRandomItems(response.data.items, 2);
 
@@ -386,7 +389,7 @@ const Recomandation = () => {
     const imageData1 = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/naver/imagesearch",
+          "https://port-0-lunch-recomandation-euegqv2blnmkyp8j.sel5.cloudtype.app/naver/imagesearch",
           {
             params: {
               query: `${data[0].title}${food}`,
@@ -407,7 +410,7 @@ const Recomandation = () => {
     const imageData2 = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/naver/imagesearch",
+          "https://port-0-lunch-recomandation-euegqv2blnmkyp8j.sel5.cloudtype.app/naver/imagesearch",
           {
             params: {
               query: `${data[1].title}${food}`,
@@ -434,7 +437,7 @@ const Recomandation = () => {
     const fetchblogData1 = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/naver/blogsearch",
+          "https://port-0-lunch-recomandation-euegqv2blnmkyp8j.sel5.cloudtype.app/naver/blogsearch",
           {
             params: {
               query: `${data[0].title} 내돈내산`,
@@ -466,7 +469,7 @@ const Recomandation = () => {
     const fetchblogData2 = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/naver/blogsearch",
+          "https://port-0-lunch-recomandation-euegqv2blnmkyp8j.sel5.cloudtype.app/naver/blogsearch",
           {
             params: {
               query: `${data[1].title} 내돈내산`,
