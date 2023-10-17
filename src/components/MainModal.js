@@ -7,7 +7,7 @@ const ModalBackground = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.7);
   z-index: 999;
 `;
 
@@ -154,7 +154,7 @@ const MainModal = ({ inputValue, food1, result, handleClick }) => {
 
   const goToRecomandation = () => {
     navigate(
-      `/Recomandation?inputValue=${encodeURIComponent(
+      `/recomandation?inputValue=${encodeURIComponent(
         inputValue
       )}&food=${encodeURIComponent(food)}`
     );

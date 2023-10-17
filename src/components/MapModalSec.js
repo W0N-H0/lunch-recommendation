@@ -6,7 +6,7 @@ const ModalBackground = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.7);
   z-index: 999;
 `;
 
@@ -16,6 +16,7 @@ const Container = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 5px;
+  border: 3px solid black;
   border-bottom: 0px;
   width: 1100px;
   height: 720px;
@@ -40,6 +41,7 @@ const SecondBarWrap = styled(TopBarWrap)`
   height: 5%;
   background: white;
   border-bottom: 0px;
+  margin-bottom: -1px;
 `;
 
 // 메인창
@@ -133,7 +135,7 @@ const MapModalSec = ({ closeModal }) => {
 
         {/* 메인창 */}
         <MainWrap>
-          <MapImg src="/images/map-img.png" alt="서울시 25개 지구" />
+          <MapImg src="/images/map-img.jpg" alt="서울시 25개 지구" />
         </MainWrap>
 
         {/* 하단바 */}

@@ -9,7 +9,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/Recomandation" element={<Recomandation />} />
+          <Route path="/recomandation" element={<Recomandation />} />
         </Routes>
       </div>
     </BrowserRouter>

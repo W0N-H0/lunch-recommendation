@@ -186,7 +186,7 @@ export const MainGame = styled.div`
         animation: ${blinkingText} 1.3s ease infinite;
         font-size: 1.8rem;
         cursor: pointer;
-        border: solid 1px gray;
+        border: solid 2px black;
 
         &:active {
           box-shadow: inset -5px -5px 5px rgba(225, 225, 225, 0.5),
@@ -250,7 +250,7 @@ export const DropDownContainer = styled.ul`
   top: 47.5px;
   width: 190px;
   list-style-type: none;
-  margin-top: -1px;
+  margin-top: 3px;
   padding: 0.5rem 0 0 0.25rem;
   border: 2.2px solid black;
   border-radius: 5px;
